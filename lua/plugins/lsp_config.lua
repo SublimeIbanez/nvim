@@ -195,6 +195,7 @@ return {
             vim.keymap.set("n", "<c-F>", function()
                 vim.lsp.buf.format({ async = true })
                 end, {})
+            vim.keymap.set("n", "<leader>ih", vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()))
         end,
     },
 
