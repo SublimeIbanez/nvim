@@ -27,7 +27,13 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                    ["<S-tab>"] = cmp.mapping.select_prev_item({
+                        behavior = cmp.SelectBehavior.Select
+                    }),
+                    ["<tab>"] = cmp.mapping.select_next_item({
+                        behavior = cmp.SelectBehavior.Select
+                    }),
+                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(-4),
@@ -35,6 +41,7 @@ return {
                 }),
                 sources = cmp.config.sources({
                     { name = "luasnip" },
+                    { name = "nvim_lsp" },
                 }, {
                     { name = "buffer" },
                 }),

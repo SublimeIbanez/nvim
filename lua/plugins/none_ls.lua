@@ -20,7 +20,7 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<space>fmt", vim.lsp.buf.format, {})
+			vim.keymap.set("n", "<leader>fmt", vim.lsp.buf.format, {})
 		end,
 	},
 }

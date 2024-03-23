@@ -136,7 +136,21 @@ return {
                 capabilities = capabilities,
             })
             lspconfig.rust_analyzer.setup({
-                capabilities = capabilities,
+                settings = {
+                    ["rust-analyzer"] = {
+                        assist = {
+                            importGranularity = "module",
+                            importPrefix = "by_self",
+                        },
+                        cargo = {
+                            loadOutDirsFromCheck = true,
+                        },
+                        procMacro = {
+                            enable = true
+                        },
+                    },
+                },
+                --capabilities = capabilities,
             })
             lspconfig.sqls.setup({
                 capabilities = capabilities,
@@ -165,7 +179,7 @@ return {
 
         config = function()
             require("lsp_lines").setup()
-            vim.keymap.set("", "<space>le", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+            vim.keymap.set("", "<leader>le", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
             vim.diagnostic.config({
                 virtual_text = false,
             })
