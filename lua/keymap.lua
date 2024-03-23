@@ -8,13 +8,10 @@ vim.keymap.set("n", "<M-h>", ":wincmd h<CR>")
 vim.keymap.set("n", "<M-l>", ":wincmd l<CR>")
 
 -- Remove the search highlight
-vim.keymap.set("n", "<leader>rh", ":nohlsearch<CR>")
+vim.keymap.set("n", "<leader>hr", ":nohlsearch<CR>")
 
 -- Open netw
 vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
-
--- dismiss noice messages
-vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", {desc = "Dismiss Noice Message"})
 
 -- Quick navigation of a line
 vim.keymap.set({ "n", "v" }, "gl", "$")

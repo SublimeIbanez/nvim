@@ -177,12 +177,12 @@ return {
             vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
             vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
             vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-            vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+            vim.keymap.set("n", "<space>cd", vim.diagnostic.open_float)
             vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
             vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-            vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
             vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
             vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, {})
+            vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
             vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, {})
             vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, {})
             vim.keymap.set("n", "<leader>wl", function()
@@ -190,8 +190,7 @@ return {
             end, {})
             vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, {})
             vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {})
-            vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, {})
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
+            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
             vim.keymap.set("n", "<c-F>", function()
                 vim.lsp.buf.format({ async = true })
             end, {})
@@ -211,6 +210,8 @@ return {
             })
         end,
     },
+
+    -- Inlay Hints
     {
         "lvimuser/lsp-inlayhints.nvim",
 

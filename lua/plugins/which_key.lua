@@ -6,27 +6,18 @@ return {
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
+            local left_margin = function()
+                local neotree_width = 32
+                local box_size = 50
+                local size = vim.api.nvim_win_get_width(0)
 
-            local wk = require("which-key")
-            wk.setup{}
-            wk.register({
-                [" "] = {
-                                    },
-
-                f = {
-                    name = "File",
-                    f = "Find File",
-                    r = "Open Recent File",
-                    n = "New File",
-                    b = "Show File Buffers",
-                },
-                w = {
-                    name = "Workspace",
-                    a = "Add Directory",
-                    r = "Remove Directory",
-                    l = "List Directories"
-                },
-            }, { prefix = "<leader>" })
+                if size == 32 then
+                    size = 130
+                else
+                    size = size - (neotree_width + box_size)
+                end
+                return size
+            end
 
             local status_ok, which_key = pcall(require, "which-key")
             if not status_ok then
@@ -43,7 +34,7 @@ return {
                     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
                     -- No actual key bindings are created
                     presets = {
-                        operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+                        operators = false, -- adds help for hperators like and registers them for motion / text object completion
                         motions = true, -- adds help for motions
                         text_objects = true, -- help for text objects triggered after entering an operator
                         windows = true, -- default bindings on <c-w>
@@ -74,17 +65,16 @@ return {
                 window = {
                     border = "rounded", -- none, single, double, shadow
                     position = "bottom", -- bottom, top
-                    margin = { 1, 35, 1,
-                        math.floor(vim.api.nvim_win_get_width(0) * 4.5)
-                    }, -- extra window margin [top, right, bottom, left]
+                    margin = { 1, 35, 1, left_margin() },-- extra window margin [top, right, bottom, left]
                     padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
                     winblend = 0,
                 },
                 layout = {
                     height = { min =20, max = 50 }, -- min and max height of the columns
+
                     width = { min = 20, max = 50 }, -- min and max width of the columns
                     spacing = 3, -- spacing between columns
-                    align = "right", -- align columns left, center or right
+                    align = "left", -- align columns left, center or right
                 },
                 ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
                 hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
@@ -107,17 +97,61 @@ return {
                 noremap = true, -- use `noremap` when creating keymaps
                 nowait = true, -- use `nowait` when creating keymaps
             }
-            local mappings = {
-                ["D"] = "Type Definition",
-                ["r"] = "Rename",
-                ["a"] = "Code Actions",
-                ["fmt"] = "Format",
-                ["rh"] = "Remove Highlights",
-                ["pv"] = "Open Netrw"
-            }
+            local mappings = {}
             which_key.setup(setup)
             which_key.register(mappings, opts)
-
+            which_key.register({
+                D = {
+                    name = "Type Definition"
+                },
+                h = {
+                    name = "Highlights",
+                    r = "Remove",
+                },
+                r = {
+                    name = "Rename",
+                },
+                c = {
+                    name = "Code",
+                    a = "Actions",
+                    d = "Diagnostics",
+                },
+                p = {
+                    name = "Open",
+                    v = "Open Netrw",
+                },
+                f = {
+                    name = "File",
+                    f = "Find",
+                    r = "Open Recent",
+                    n = "New",
+                    b = "Show Buffers",
+                    m = "Format",
+                },
+                w = {
+                    name = "Workspace",
+                    a = "Add Directory",
+                    r = "Remove Directory",
+                    l = "List Directories"
+                },
+            }, { prefix = "<leader>" })
+            which_key.register({
+                d = {
+                    name = "Definition",
+                },
+                D = {
+                    name = "Declaration",
+                },
+                r = {
+                    name = "References",
+                },
+                i = {
+                    name = "Implementation",
+                },
+                s = {
+                    name = "Signature",
+                },
+            }, { prefix = "g" })
         end,
     },
 }
