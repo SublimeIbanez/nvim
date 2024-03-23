@@ -13,6 +13,9 @@ vim.keymap.set("n", "<leader>rh", ":nohlsearch<CR>")
 -- Open netw
 vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
 
+-- dismiss noice messages
+vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", {desc = "Dismiss Noice Message"})
+
 -- Quick navigation of a line
 vim.keymap.set({ "n", "v" }, "gl", "$")
 vim.keymap.set({ "n", "v" }, "gh", "^")
