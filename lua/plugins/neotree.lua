@@ -71,6 +71,6 @@ return {
             },
         })
     end,
-    vim.keymap.set("n", "<leader>t", ":Neotree filesystem reveal right<cr>")
+    vim.keymap.set("n", "<leader>nt", ":Neotree filesystem reveal right<cr>")
 }
 

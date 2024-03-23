@@ -27,6 +27,29 @@ return {
 					end
 				end,
 			},
+	  		{
+    			{ "n" },
+    			"gcc",
+    			function(_, count)
+    				if count == 0 then
+    					vim.cmd("normal! gcc")
+					else
+						vim.cmd("normal! " .. count .. "gcc")
+					end
+				end,
+			},
+            {
+    			{ "v" },
+    			"gc",
+    			function(_, count)
+    				if count == 0 then
+    					vim.cmd("normal! gc")
+					else
+						vim.cmd("normal! " .. count .. "gc")
+					end
+				end,
+			},
+
 		},
 	},
 	keys = {

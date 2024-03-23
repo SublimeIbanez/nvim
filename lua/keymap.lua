@@ -8,7 +8,8 @@ vim.keymap.set("n", "<M-h>", ":wincmd h<CR>")
 vim.keymap.set("n", "<M-l>", ":wincmd l<CR>")
 
 -- Remove the search highlight
-vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
+vim.keymap.set("n", "<leader>rh", ":nohlsearch<CR>")
+
 -- Open netw
 vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
 
