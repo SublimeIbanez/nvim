@@ -16,6 +16,7 @@ return {
             hijack_netrw_behavior = "open_default",
             window = {
                 position = "right",
+                width = 32,
                 mappings = {
                     ["<space>"] = {
                         nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 

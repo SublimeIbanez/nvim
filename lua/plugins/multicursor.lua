@@ -27,7 +27,7 @@ return {
 					end
 				end,
 			},
-	  		{
+	        {
     			{ "n" },
     			"gcc",
     			function(_, count)
