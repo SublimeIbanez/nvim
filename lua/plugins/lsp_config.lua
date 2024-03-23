@@ -174,7 +174,7 @@ return {
             -- global kepmaps
             vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-		    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
+            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
             vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
             vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
             vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -187,15 +187,15 @@ return {
             vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, {})
             vim.keymap.set("n", "<leader>wl", function()
                 print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                end, {})
+            end, {})
             vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, {})
             vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {})
             vim.keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, {})
             vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
             vim.keymap.set("n", "<c-F>", function()
                 vim.lsp.buf.format({ async = true })
-                end, {})
-            vim.keymap.set("n", "<leader>ih", vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()))
+            end, {})
+            --vim.keymap.set("n", "<leader>ih", ..........., {})
         end,
     },
 
@@ -211,4 +211,25 @@ return {
             })
         end,
     },
+    {
+        "lvimuser/lsp-inlayhints.nvim",
+
+        configure = function()
+            require("lsp-inlayhints").setup()
+            vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = "LspAttach_inlayhints",
+                callback = function(args)
+                    if not (args.data and args.data.client_id) then
+                        return
+                    end
+
+                    local bufnr = args.buf
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    require("lsp-inlayhints").on_attach(client, bufnr)
+                end
+            })
+            require("lsp-inlayhints").toggle()
+        end,
+    }
 }

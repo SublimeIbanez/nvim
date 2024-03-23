@@ -12,9 +12,9 @@ return {
                 -- Should key mappings be created
                 create_mappings = true,
                 -- Normal mode mapping left hand side
-                line_mapping = "gcc",
+                line_mapping = "<C-c>",
                 -- Visual/Operator mapping left hand side
-                operator_mapping = "gc",
+                operator_mapping = "<C-c>",
                 -- text object mapping, comment chunk,,
                 comment_chunk_text_object = "ic",
                 -- Hook function to call before commenting takes place
