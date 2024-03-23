@@ -31,7 +31,7 @@ return {
                     "htmx",
                     --"hls",
                     "jsonls",
-                    "jdtls", -- "java_language_server"
+                    -- "jdtls", -- "java_language_server"
                     "tsserver",
                     "kotlin_language_server",
                     "ltex",
