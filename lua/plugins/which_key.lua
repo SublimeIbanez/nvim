@@ -63,7 +63,7 @@ return {
                         windows = true, -- default bindings on <c-w>
                         nav = true, -- misc bindings to work with windows
                         z = true, -- bindings for folds, spelling and others prefixed with z
-                        g = true, -- bindings for prefixed with g
+                        g = false, -- bindings for prefixed with g
                     },
                 },
                 -- add operators that will trigger motion and text object completion
@@ -120,7 +120,7 @@ return {
                 nowait = true, -- use `nowait` when creating keymaps
             }
             local mappings = {
-                -- ["f"] = "File",
+                --["g"] = "Goto",
                 -- ["w"] = "Workspace",
                 -- ["D"] = "Type Definition",
                 -- ["r"] = "Rename",
