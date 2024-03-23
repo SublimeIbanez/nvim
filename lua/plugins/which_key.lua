@@ -10,8 +10,13 @@ return {
             local wk = require("which-key")
             wk.setup{}
             wk.register({
+                [" "] = {
+                    rh = "Remove Highlights",
+                    pv = "Open Netrw"
+                },
+
                 f = {
-                    name = "file",
+                    name = "File",
                     f = "Find File",
                     r = "Open Recent File",
                     n = "New File",
@@ -24,14 +29,10 @@ return {
                     r = "Remove Directory",
                     l = "List Directories"
                 },
-                D = { name = "Type Definition" },
-                r = { name = "Rename" },
-                a = { name = "Code Actions" },
             }, { prefix = "<leader>" })
 
             wk.register({
-                g = {
-                    name = "Goto",
+                    name = "+Goto",
                     D = { name = "Declaration" },
                     d = { name = "Definition" },
                     i = { name = "Implementation" },
@@ -39,8 +40,7 @@ return {
                     s = { name = "Signature" },
                     l = { name = "End of Line" },
                     h = { name = "First Non-Whitespace character" },
-                },
-            }, { prefix = "" })
+            }, { prefix = "g", mode = "n" })
 
             local status_ok, which_key = pcall(require, "which-key")
             if not status_ok then
@@ -120,11 +120,9 @@ return {
                 nowait = true, -- use `nowait` when creating keymaps
             }
             local mappings = {
-                --["g"] = "Goto",
-                -- ["w"] = "Workspace",
-                -- ["D"] = "Type Definition",
-                -- ["r"] = "Rename",
-                -- ["a"] = "Code Actions",
+                ["D"] = "Type Definition",
+                ["r"] = "Rename",
+                ["a"] = "Code Actions",
             }
             which_key.setup(setup)
             which_key.register(mappings, opts)
