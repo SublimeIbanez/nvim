@@ -11,9 +11,7 @@ return {
             wk.setup{}
             wk.register({
                 [" "] = {
-                    rh = "Remove Highlights",
-                    pv = "Open Netrw"
-                },
+                                    },
 
                 f = {
                     name = "File",
@@ -22,7 +20,6 @@ return {
                     n = "New File",
                     b = "Show File Buffers",
                 },
-                ["fmt"] = { name = "Format" },
                 w = {
                     name = "Workspace",
                     a = "Add Directory",
@@ -31,24 +28,13 @@ return {
                 },
             }, { prefix = "<leader>" })
 
-            wk.register({
-                    name = "+Goto",
-                    D = { name = "Declaration" },
-                    d = { name = "Definition" },
-                    i = { name = "Implementation" },
-                    r = { name = "References" },
-                    s = { name = "Signature" },
-                    l = { name = "End of Line" },
-                    h = { name = "First Non-Whitespace character" },
-            }, { prefix = "g", mode = "n" })
-
             local status_ok, which_key = pcall(require, "which-key")
             if not status_ok then
                 return
             end
             local setup = {
                 plugins = {
-                    marks = true, -- shows a list of your marks on ' and `
+                    marks = false, -- shows a list of your marks on ' and `
                     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
                     spelling = {
                         enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
@@ -88,15 +74,17 @@ return {
                 window = {
                     border = "rounded", -- none, single, double, shadow
                     position = "bottom", -- bottom, top
-                    margin = { 1, 30, 1, 0 }, -- extra window margin [top, right, bottom, left]
-                    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+                    margin = { 1, 35, 1,
+                        math.floor(vim.api.nvim_win_get_width(0) * 4.5)
+                    }, -- extra window margin [top, right, bottom, left]
+                    padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
                     winblend = 0,
                 },
                 layout = {
-                    height = { min = 4, max = 25 }, -- min and max height of the columns
+                    height = { min = 4, max = 50 }, -- min and max height of the columns
                     width = { min = 20, max = 50 }, -- min and max width of the columns
                     spacing = 3, -- spacing between columns
-                    align = "left", -- align columns left, center or right
+                    align = "right", -- align columns left, center or right
                 },
                 ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
                 hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
@@ -123,6 +111,9 @@ return {
                 ["D"] = "Type Definition",
                 ["r"] = "Rename",
                 ["a"] = "Code Actions",
+                ["fmt"] = "Format",
+                ["rh"] = "Remove Highlights",
+                ["pv"] = "Open Netrw"
             }
             which_key.setup(setup)
             which_key.register(mappings, opts)
