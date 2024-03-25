@@ -22,10 +22,6 @@ return {
             local gitui = fterm:new({
                 ft = "fterm_gitui",
                 cmd = "gitui",
-                dimensions = {
-                    height = 0.7,
-                    width = 0.7,
-                }
             })
 
             vim.keymap.set("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>', { desc = "Open Terminal" })

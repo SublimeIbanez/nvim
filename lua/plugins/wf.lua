@@ -59,7 +59,16 @@ return {
                 -- mark(opts?: table) -> function
                 -- opts?: option
                 which_key({ text_insert_in_advance = "<Leader>" }),
-                { nowait = true, noremap = true, silent = true, desc = "Which-key /", }
+                { noremap = true, silent = true, desc = "Which-key /", }
+            )
+
+            vim.keymap.set(
+                "n",
+                "g",
+                -- mark(opts?: table) -> function
+                -- opts?: option
+                which_key({ text_insert_in_advance = "g" }),
+                { noremap = true, silent = true, desc = "Goto", }
             )
         end
     }

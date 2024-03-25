@@ -28,16 +28,19 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {}
 require("lazy").setup("plugins", opts)
 
-
-vim.api.nvim_create_autocmd("VimEnter", {
-    pattern = "",
-    callback = function()
-        if vim.fn.bufname() == "" then
-            -- Dashboard must be loaded before neotree
-            vim.cmd("Dashboard")
-        end
-        vim.cmd("Neotree show")
-        vim.cmd("redraw")
-    end,
-})
-
+-- VimEnter
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--     pattern = "",
+--     callback = function()
+--         if vim.fn.bufname() == "" then
+--             -- Dashboard must be loaded before neotree
+--             vim.cmd("Dashboard")
+--         end
+--     end,
+-- })
+-- vim.api.nvim_create_autocmd("WinEnter", {
+--     pattern = "*",
+--     callback = function()
+--         vim.cmd("Neotree show")
+--     end
+-- })
