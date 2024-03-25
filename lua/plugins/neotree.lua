@@ -321,5 +321,5 @@ return {
             }
         })
     end,
-    vim.keymap.set("n", "<leader>nt", ":Neotree filesystem show right<cr>"),
+    vim.keymap.set("n", "<leader>nt", ":Neotree filesystem show right<cr>", { desc = "Open Neotree" }),
 }

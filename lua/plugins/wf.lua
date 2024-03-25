@@ -4,7 +4,7 @@ return {
 
         config = function()
             require("wf").setup({
-                theme = "space", -- default, space, chad
+                theme = "chad", -- default, space, chad
             })
             local which_key = require("wf.builtin.which_key")
             local register = require("wf.builtin.register")
@@ -14,13 +14,13 @@ return {
 
             -- Register
             vim.keymap.set("n", "<leader>wr", register(), {
-                noremap = true, silent = true, desc = "[wf.nvim] Register"
+                noremap = true, silent = true, desc = "Register"
             })
 
             -- Bookmark
             vim.keymap.set(
                 "n",
-                "<Space>wbo",
+                "<leader>wbo",
                 -- bookmark(bookmark_dirs: table, opts?: table) -> function
                 -- bookmark_dirs: directory or file paths
                 -- opts?: option
@@ -28,18 +28,18 @@ return {
                     nvim = "~/.config/nvim",
                     zsh = "~/.zshrc",
                 }),
-                { noremap = true, silent = true, desc = "[wf.nvim] bookmark" }
+                { noremap = true, silent = true, desc = "WF Bookmark" }
             )
 
             -- Buffer
             -- Buffer
             vim.keymap.set(
                 "n",
-                "<Space>wbu",
+                "<leader>wbu",
                 -- buffer(opts?: table) -> function
                 -- opts?: option
                 buffer(),
-                { noremap = true, silent = true, desc = "[wf.nvim] buffer"}
+                { noremap = true, silent = true, desc = "WF Buffer"}
             )
 
             -- Mark
@@ -49,7 +49,7 @@ return {
                 -- mark(opts?: table) -> function
                 -- opts?: option
                 mark(),
-                { nowait = true, noremap = true, silent = true, desc = "[wf.nvim] mark"}
+                { nowait = true, noremap = true, silent = true, desc = "Mark"}
             )
 
             -- Which Key
@@ -59,7 +59,7 @@ return {
                 -- mark(opts?: table) -> function
                 -- opts?: option
                 which_key({ text_insert_in_advance = "<Leader>" }),
-                { noremap = true, silent = true, desc = "[wf.nvim] which-key /", }
+                { nowait = true, noremap = true, silent = true, desc = "Which-key /", }
             )
         end
     }

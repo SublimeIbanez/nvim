@@ -28,15 +28,14 @@ return {
                 }
             })
 
-            vim.keymap.set("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>')
-            vim.keymap.set("t", "<C-t>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
+            vim.keymap.set("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>', { desc = "Open Terminal" })
+            vim.keymap.set("t", "<C-t>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', { desc = "Hide Terminal" })
             vim.keymap.set("t", "<C-b>", function()
                 btop:toggle()
-            end)
+            end, { desc = "Toggle BTOP <In FTerm>" })
             vim.keymap.set("t", "<C-g>", function()
                 gitui:toggle()
-            end)
-
+            end, { desc = "Toggle GitUI <In FTerm>" })
 		end,
 	},
 }

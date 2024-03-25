@@ -19,8 +19,6 @@ return {
 					null_ls.builtins.completion.spell,
 				},
 			})
-
-			vim.keymap.set("n", "<leader>fmt", vim.lsp.buf.format, {})
 		end,
 	},
 }

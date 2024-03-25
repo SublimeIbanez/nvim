@@ -8,11 +8,10 @@ return {
 
         config = function()
             local builtin = require("telescope.builtin")
-            -- vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-            vim.keymap.set('n', '<leader>ff', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git'}})<cr>")
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-            vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-            vim.keymap.set("n", "<leader>fht", builtin.help_tags, {})
+            vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find File" })
+            vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Grep" })
+            vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffer" })
+            vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find Help Tags"})
         end
     },
     {
@@ -29,5 +28,4 @@ return {
             require("telescope").load_extension("ui-select")
         end
     },
-    
 }

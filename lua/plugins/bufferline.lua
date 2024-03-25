@@ -110,7 +110,7 @@ return {
                 }
             }
         end,
-        vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>"),
-        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>"),
+        vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { desc = "Next Buffer" }),
+        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>", { desc = "Previous Buffer" }),
     },
 }
