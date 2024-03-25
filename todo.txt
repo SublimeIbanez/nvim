@@ -20,7 +20,7 @@ Dashboard:
 - Adjust the theme
 
 Lualine:
-- None
+- Change theme
 
 Comment:
 - Fix the keybinding issue (still uses gcc and gc instead of <leader>....)

@@ -13,10 +13,7 @@ return {
                     statusline = {},       -- only ignores the ft for statusline.
                     winbar = {},           -- only ignores the ft for winbar.
                 },
-                ignore_focus = {
-                    "packer",
-                    "NVimTree"
-                },
+                ignore_focus = {},
                 theme = "codedark",--wal --theme ashes"
             }
         })
