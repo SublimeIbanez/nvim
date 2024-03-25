@@ -1,25 +1,53 @@
 return {
-    "terrortylor/nvim-comment",
-    config = function()
-        require('nvim_comment').setup({
-            {
-                -- Linters prefer comment and line to have a space in between markers
-                marker_padding = true,
-                -- should comment out empty or whitespace only lines
-                comment_empty = false,
-                -- trim empty comment whitespace
-                comment_empty_trim_whitespace = true,
-                -- Should key mappings be created
-                create_mappings = true,
-                -- Normal mode mapping left hand side
-                line_mapping = "<C-c>",
-                -- Visual/Operator mapping left hand side
-                operator_mapping = "<C-c>",
-                -- text object mapping, comment chunk,,
-                comment_chunk_text_object = "ic",
-                -- Hook function to call before commenting takes place
-                hook = nil
-            }
-        })
-    end
+    {
+        "numToStr/Comment.nvim",
+        opts = {
+            ---Add a space b/w comment and the line
+            padding = true,
+            ---Whether the cursor should stay at its position
+            sticky = true,
+            ---Lines to be ignored while (un)comment
+            ignore = nil,
+            ---LHS of toggle mappings in NORMAL mode
+            toggler = {
+                ---Line-comment toggle keymap
+                line = "<leader>cch",
+                ---Block-comment toggle keymap
+                block = "<leader>ccb",
+            },
+            ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+            opleader = {
+                ---Line-comment keymap
+                line = "<leader>ccl",
+                ---Block-comment keymap
+                block = "<leader>ccb",
+            },
+            ---LHS of extra mappings
+            extra = {
+                ---Add comment on the line above
+                above = "<leader>cck",
+                ---Add comment on the line below
+                below = "<leader>ccj",
+                ---Add comment at the end of line
+                eol = "<leader>ccl",
+            },
+            ---Enable keybindings
+            ---NOTE: If given `false` then the plugin won't create any mappings
+            mappings = {
+                ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+                basic = false,
+                ---Extra mapping; `gco`, `gcO`, `gcA`
+                extra = false,
+            },
+            ---Function to call before (un)comment
+            pre_hook = nil,
+            ---Function to call after (un)comment
+            post_hook = nil,
+        },
+        lazy = false,
+
+        config = function()
+            require("Comment").setup()
+        end
+    },
 }

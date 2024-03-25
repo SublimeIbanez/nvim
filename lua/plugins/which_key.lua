@@ -59,7 +59,7 @@ return {
                 -- mark(opts?: table) -> function
                 -- opts?: option
                 which_key({ text_insert_in_advance = "<Leader>" }),
-                { nowait = true, noremap = true, silent = true, desc = "[wf.nvim] which-key /", }
+                { noremap = true, silent = true, desc = "[wf.nvim] which-key /", }
             )
         end
     }

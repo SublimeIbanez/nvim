@@ -28,28 +28,16 @@ return {
 				end,
 			},
 	        {
-    			{ "n" },
-    			"gcc",
+    			{ "n", "v" },
+    			"<leader>cch",
     			function(_, count)
     				if count == 0 then
-    					vim.cmd("normal! gcc")
+    					vim.cmd("normal! <leader>cch")
 					else
-						vim.cmd("normal! " .. count .. "gcc")
+						vim.cmd("normal! " .. count .. "<leader>cch")
 					end
 				end,
 			},
-            {
-    			{ "v" },
-    			"gc",
-    			function(_, count)
-    				if count == 0 then
-    					vim.cmd("normal! gc")
-					else
-						vim.cmd("normal! " .. count .. "gc")
-					end
-				end,
-			},
-
 		},
 	},
 	keys = {
