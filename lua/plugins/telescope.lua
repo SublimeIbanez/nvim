@@ -13,7 +13,6 @@ return {
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
             vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
             vim.keymap.set("n", "<leader>fht", builtin.help_tags, {})
-            vim.keymap.set("n", "<leader>fhf", builtin.help_tags, {})
         end
     },
     {
@@ -30,15 +29,5 @@ return {
             require("telescope").load_extension("ui-select")
         end
     },
-    {
-        "akinsho/bufferline.nvim",
-        version = "*",
-        depend   = "nvim-tree/nvim-web-devicons",
-
-        config = function()
-            require("bufferline").setup{}
-        end,
-        vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>"),
-        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>"),
-    },
+    
 }

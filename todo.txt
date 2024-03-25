@@ -5,7 +5,6 @@ Which-Key:
 
 Neotree:
 - Fix the startup lines
-- Remove the lualine at the bottom
 - Make the bufferline not overlap with it?
 
 Bufferline:
@@ -20,6 +19,9 @@ Dashboard:
 - Adjust its position
 - Adjust the theme
 
+Lualine:
+- None
+
 Comment:
 - Fix the keybinding issue (still uses gcc and gc instead of <leader>....)
 
@@ -33,7 +35,7 @@ Telescope:
 - None
 
 Terminal:
-- None
+- Make the background black
 
 Theme:
 - Rework it entirely
