@@ -9,6 +9,15 @@ return {
     },
     config = function()
         require("neo-tree").setup({
+            event_handlers = {
+                {
+                    event = "neo_tree_buffer_enter",
+                    handler = function()
+                    vim.opt.relativenumber = false
+                    vim.opt.number = false
+                    end,
+                }
+            },
             close_if_last_window = true,
             filesystem = {
                 bind_to_cwd = true,
@@ -19,7 +28,8 @@ return {
                 width = 32,
                 mappings = {
                     ["<space>"] = {
-                        nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+                        "<leader>",
+                        nowait = false, -- disable nowait if you have existing combos starting with this char that you want to use 
                     },
                     ["<2-LeftMouse>"] = "open",
                     ["<cr>"] = "open",
@@ -72,6 +82,6 @@ return {
             },
         })
     end,
-    vim.keymap.set("n", "<leader>nt", ":Neotree filesystem reveal right<cr>")
+    vim.keymap.set("n", "<leader>nt", ":Neotree filesystem reveal right<cr>"),
 }
 

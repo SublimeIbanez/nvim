@@ -1,157 +1,66 @@
 return {
     {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
+        "Cassin01/wf.nvim",
 
         config = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-            local left_margin = function()
-                local neotree_width = 32
-                local box_size = 50
-                local size = vim.api.nvim_win_get_width(0)
+            require("wf").setup({
+                theme = "space", -- default, space, chad
+            })
+            local which_key = require("wf.builtin.which_key")
+            local register = require("wf.builtin.register")
+            local bookmark = require("wf.builtin.bookmark")
+            local buffer = require("wf.builtin.buffer")
+            local mark = require("wf.builtin.mark")
 
-                if size == 32 then
-                    size = 130
-                else
-                    size = size - (neotree_width + box_size)
-                end
-                return size
-            end
+            -- Register
+            vim.keymap.set("n", "<leader>wr", register(), {
+                noremap = true, silent = true, desc = "[wf.nvim] Register"
+            })
 
-            local status_ok, which_key = pcall(require, "which-key")
-            if not status_ok then
-                return
-            end
-            local setup = {
-                plugins = {
-                    marks = false, -- shows a list of your marks on ' and `
-                    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-                    spelling = {
-                        enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-                        suggestions = 20, -- how many suggestions should be shown in the list?
-                    },
-                    -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-                    -- No actual key bindings are created
-                    presets = {
-                        operators = false, -- adds help for hperators like and registers them for motion / text object completion
-                        motions = true, -- adds help for motions
-                        text_objects = true, -- help for text objects triggered after entering an operator
-                        windows = true, -- default bindings on <c-w>
-                        nav = true, -- misc bindings to work with windows
-                        z = true, -- bindings for folds, spelling and others prefixed with z
-                        g = false, -- bindings for prefixed with g
-                    },
-                },
-                -- add operators that will trigger motion and text object completion
-                -- to enable all native operators, set the preset / operators plugin above
-                -- operators = { gc = "Comments" },
-                key_labels = {
-                    -- override the label used to display some keys. It doesn't effect WK in any other way.
-                    -- For example:
-                    -- ["<space>"] = "SPC",
-                    -- ["<cr>"] = "RET",
-                    -- ["<tab>"] = "TAB",
-                },
-                icons = {
-                    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-                    separator = "➜ ", -- symbol used between a key and it's label
-                    group = "+", -- symbol prepended to a group
-                },
-                popup_mappings = {
-                    scroll_down = "<c-d>", -- binding to scroll down inside the popup
-                    scroll_up = "<c-u>", -- binding to scroll up inside the popup
-                },
-                window = {
-                    border = "rounded", -- none, single, double, shadow
-                    position = "bottom", -- bottom, top
-                    margin = { 1, 35, 1, left_margin() },-- extra window margin [top, right, bottom, left]
-                    padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
-                    winblend = 0,
-                },
-                layout = {
-                    height = { min =20, max = 50 }, -- min and max height of the columns
+            -- Bookmark
+            vim.keymap.set(
+                "n",
+                "<Space>wbo",
+                -- bookmark(bookmark_dirs: table, opts?: table) -> function
+                -- bookmark_dirs: directory or file paths
+                -- opts?: option
+                bookmark({
+                    nvim = "~/.config/nvim",
+                    zsh = "~/.zshrc",
+                }),
+                { noremap = true, silent = true, desc = "[wf.nvim] bookmark" }
+            )
 
-                    width = { min = 20, max = 50 }, -- min and max width of the columns
-                    spacing = 3, -- spacing between columns
-                    align = "left", -- align columns left, center or right
-                },
-                ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-                hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-                show_help = true, -- show help message on the command line when the popup is visible
-                triggers = "auto", -- automatically setup triggers
-                -- triggers = {"<leader>"} -- or specify a list manually
-                triggers_blacklist = {
-                    -- list of mode / prefixes that should never be hooked by WhichKey
-                    -- this is mostly relevant for key maps that start with a native binding
-                    -- most people should not need to change this
-                    i = { "j", "k" },
-                    v = { "j", "k" },
-                },
-            }
-            local opts = {
-                mode = "n", -- NORMAL mode
-                prefix = "<leader>",
-                buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-                silent = true, -- use `silent` when creating keymaps
-                noremap = true, -- use `noremap` when creating keymaps
-                nowait = true, -- use `nowait` when creating keymaps
-            }
-            local mappings = {}
-            which_key.setup(setup)
-            which_key.register(mappings, opts)
-            which_key.register({
-                D = {
-                    name = "Type Definition"
-                },
-                h = {
-                    name = "Highlights",
-                    r = "Remove",
-                },
-                r = {
-                    name = "Rename",
-                },
-                c = {
-                    name = "Code",
-                    a = "Actions",
-                    d = "Diagnostics",
-                },
-                p = {
-                    name = "Open",
-                    v = "Open Netrw",
-                },
-                f = {
-                    name = "File",
-                    f = "Find",
-                    r = "Open Recent",
-                    n = "New",
-                    b = "Show Buffers",
-                    m = "Format",
-                },
-                w = {
-                    name = "Workspace",
-                    a = "Add Directory",
-                    r = "Remove Directory",
-                    l = "List Directories"
-                },
-            }, { prefix = "<leader>" })
-            which_key.register({
-                d = {
-                    name = "Definition",
-                },
-                D = {
-                    name = "Declaration",
-                },
-                r = {
-                    name = "References",
-                },
-                i = {
-                    name = "Implementation",
-                },
-                s = {
-                    name = "Signature",
-                },
-            }, { prefix = "g" })
-        end,
-    },
+            -- Buffer
+            -- Buffer
+            vim.keymap.set(
+                "n",
+                "<Space>wbu",
+                -- buffer(opts?: table) -> function
+                -- opts?: option
+                buffer(),
+                { noremap = true, silent = true, desc = "[wf.nvim] buffer"}
+            )
+
+            -- Mark
+            vim.keymap.set(
+                "n",
+                "'",
+                -- mark(opts?: table) -> function
+                -- opts?: option
+                mark(),
+                { nowait = true, noremap = true, silent = true, desc = "[wf.nvim] mark"}
+            )
+
+            -- Which Key
+            vim.keymap.set(
+                "n",
+                "<Leader>",
+                -- mark(opts?: table) -> function
+                -- opts?: option
+                which_key({ text_insert_in_advance = "<Leader>" }),
+                { nowait = true, noremap = true, silent = true, desc = "[wf.nvim] which-key /", }
+            )
+        end
+    }
 }

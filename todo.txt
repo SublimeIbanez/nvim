@@ -1,0 +1,18 @@
+Which-Key:
+- Complete all of the command descriptions
+- Reposition it if possible
+
+Neotree:
+- Fix the startup lines
+- Remove the lualine at the bottom
+- Make the bufferline not overlap with it?
+
+Bufferline:
+- Make it not overlap with Neotree
+- Make it not start with an empty buffer?
+
+Autocomplete:
+- Fix the random error when hitting enter
+- If possible, make it so I have to tab into it to allow for autocompletion
+
+

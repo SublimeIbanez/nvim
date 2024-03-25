@@ -7,8 +7,8 @@ return {
 
 				border = "double",
 				dimensions = {
-					height = 0.9,
-					width = 0.9,
+					height = 0.7,
+					width = 0.7,
 				},
 			})
 
