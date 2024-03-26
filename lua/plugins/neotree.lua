@@ -136,7 +136,7 @@ return {
             commands = {},
             window = {
                 position = "right",
-                width = 30,
+                width = 40,
                 mapping_options = {
                     noremap = true,
                     nowait = true,
@@ -312,5 +312,5 @@ return {
             },
         })
     end,
-    vim.keymap.set("n", "<leader>nt", ":Neotree filesystem reveal right<cr>", { desc = "Open Neotree" }),
+    vim.keymap.set("n", "<leader>nt", ":Neotree toggle<cr>", { desc = "Open Neotree" }),
 }

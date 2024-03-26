@@ -1,13 +1,17 @@
+==Complete:
+- Neotree
+- Bufferline
+- Lualine
+- NoneLs
+- Telescope
+- General
+- Theme
+
+
+==Incomplete:
 Which-Key:
 - Reposition it if possible
-- Make it start instantly
-
-Neotree:
-- Fix the startup lines
-- Make the bufferline not overlap with it?
-
-Bufferline:
-- Make it not overlap with Neotree
+- Make it start instantly but also have all possible vim keybinds that haven't been remapped
 
 Autocomplete:
 - If possible, make it so I have to tab into it to allow for autocompletion
@@ -16,26 +20,18 @@ Dashboard:
 - Adjust its position
 - Adjust the theme
 
-Lualine:
-- Change theme
-
 Comment:
 - Fix the keybinding issue (still uses gcc and gc instead of <leader>....)
 
 Debug:
 - Actually implement / fix it
 
-NoneLs:
-- Resolve formatting issues
-
-Telescope:
-- None
-
 Terminal:
 - Make the background black
 
-Theme:
-- Rework it entirely
 
 TreeSitter:
 - Make indent lines work with the dashboard
+
+LSP
+- Make the gutter a fixed width
