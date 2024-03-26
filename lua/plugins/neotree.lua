@@ -48,9 +48,14 @@ return {
                     end,
                 },
             },
-            open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-            sort_case_insensitive = false,                            -- used when sorting files and directories in the tree
-            sort_function = nil,                                      -- use a custom function for sorting files and directories in the tree
+            open_files_do_not_replace_types = { -- when opening files, do not use windows containing these filetypes or buftypes
+
+                "terminal",
+                "trouble",
+                "qf"
+            },
+            sort_case_insensitive = false, -- used when sorting files and directories in the tree
+            sort_function = nil,           -- use a custom function for sorting files and directories in the tree
             -- sort_function = function (a,b)
             --       if a.type == b.type then
             --           return a.path > b.path
@@ -64,7 +69,7 @@ return {
                 },
                 indent = {
                     indent_size = 2,
-                    padding = 1, -- extra padding on left hand side
+                    padding = 0, -- extra padding on left hand side
                     -- indent guides
                     with_markers = true,
                     indent_marker = "│",
@@ -86,7 +91,7 @@ return {
                     highlight = "NeoTreeFileIcon",
                 },
                 modified = {
-                    symbol = "[+]",
+                    symbol = "+",
                     highlight = "NeoTreeModified",
                 },
                 name = {
@@ -136,7 +141,7 @@ return {
             commands = {},
             window = {
                 position = "right",
-                width = 40,
+                width = 35,
                 mapping_options = {
                     noremap = true,
                     nowait = true,
@@ -222,11 +227,11 @@ return {
                     },
                 },
                 follow_current_file = {
-                    enabled = true,         -- This will find and focus the file in the active buffer every time
+                    enabled = true,                     -- This will find and focus the file in the active buffer every time
                     --               -- the current file is changed while the tree is open.
-                    leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+                    leave_dirs_open = true,             -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
                 },
-                group_empty_dirs = false,   -- when true, empty folders will be grouped together
+                group_empty_dirs = false,               -- when true, empty folders will be grouped together
                 hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
                 -- in whatever position is specified in window.position
                 -- "open_current",  -- netrw disabled, opening a directory opens within the
@@ -268,11 +273,11 @@ return {
             },
             buffers = {
                 follow_current_file = {
-                    enabled = true, -- This will find and focus the file in the active buffer every time
+                    enabled = true,          -- This will find and focus the file in the active buffer every time
                     --              -- the current file is changed while the tree is open.
                     leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
                 },
-                group_empty_dirs = true, -- when true, empty folders will be grouped together
+                group_empty_dirs = true,     -- when true, empty folders will be grouped together
                 show_unloaded = true,
                 window = {
                     mappings = {
@@ -312,5 +317,6 @@ return {
             },
         })
     end,
-    vim.keymap.set("n", "<leader>nt", ":Neotree toggle<cr>", { desc = "Open Neotree" }),
+    vim.keymap.set("n", "<leader>nt", ":Neotree toggle<cr>",
+        { noremap = true, silent = true, desc = "Open Neotree" }),
 }

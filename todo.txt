@@ -1,5 +1,5 @@
 ==Complete:
-- Neotree
+- ToggleTerm
 - Bufferline
 - Lualine
 - NoneLs
@@ -9,9 +9,13 @@
 
 
 ==Incomplete:
-Which-Key:
+WF:
+- Make it work again
 - Reposition it if possible
 - Make it start instantly but also have all possible vim keybinds that haven't been remapped
+
+Neotree
+- Get it to open on startup and close properly
 
 Autocomplete:
 - If possible, make it so I have to tab into it to allow for autocompletion
@@ -24,10 +28,6 @@ Comment:
 
 Debug:
 - Actually implement / fix it
-
-Terminal:
-- Make the background black
-
 
 TreeSitter:
 - Make indent lines work with the dashboard

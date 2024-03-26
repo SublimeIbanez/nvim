@@ -173,25 +173,41 @@ return {
             })
 
             -- global kepmaps
-            vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, { desc = "Display LSP Info" })
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
-            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto References" })
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Actions" })
-            vim.keymap.set("n", "<space>cd", vim.diagnostic.open_float, { desc = "Open Diagnostics" })
-            vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Goto Prev Diagnostic" })
-            vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Goto Next Diagnostic" })
-            vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto Implementation" })
-            vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Goto Signature Help" })
-            vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto References" })
-            vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Dir" })
-            vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove Workspace Dir" })
+            vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover,
+                { noremap = true, silent = true, desc = "Display LSP Info" })
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition,
+                { noremap = true, silent = true, desc = "Goto Definition" })
+            vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
+                { noremap = true, silent = true, desc = "Goto Declaration" })
+            vim.keymap.set("n", "gr", vim.lsp.buf.references,
+                { noremap = true, silent = true, desc = "Goto References" })
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,
+                { noremap = true, silent = true, desc = "Code Actions" })
+            vim.keymap.set("n", "<space>cd", vim.diagnostic.open_float,
+                { noremap = true, silent = true, desc = "Open Diagnostics" })
+            vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
+                { noremap = true, silent = true, desc = "Goto Prev Diagnostic" })
+            vim.keymap.set("n", "]d", vim.diagnostic.goto_next,
+                { noremap = true, silent = true, desc = "Goto Next Diagnostic" })
+            vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
+                { noremap = true, silent = true, desc = "Goto Implementation" })
+            vim.keymap.set("n", "gs", vim.lsp.buf.signature_help,
+                { noremap = true, silent = true, desc = "Goto Signature Help" })
+            vim.keymap.set("n", "gr", vim.lsp.buf.references,
+                { noremap = true, silent = true, desc = "Goto References" })
+            vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder,
+                { noremap = true, silent = true, desc = "Add Workspace Dir" })
+            vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder,
+                { noremap = true, silent = true, desc = "Remove Workspace Dir" })
             vim.keymap.set("n", "<leader>wl", function()
                 print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-            end, { desc = "List Workspace Folders" })
-            vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Type Definition" })
-            vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
-            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+            end, { noremap = true, silent = true, desc = "List Workspace Folders" })
+            vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition,
+                { noremap = true, silent = true, desc = "Type Definition" })
+            vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename,
+                { noremap = true, silent = true, desc = "Rename" })
+            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,
+                { noremap = true, silent = true, desc = "Code Action" })
             vim.keymap.set("n", "<leader>fm", function()
                 vim.lsp.buf.format({ async = true })
                 vim.cmd("normal! ma")
@@ -199,10 +215,10 @@ return {
                 vim.cmd(":retab")
                 vim.cmd("normal! <Esc>")
                 vim.cmd("normal! `a")
-            end, { desc = "Format" })
+            end, { noremap = true, silent = true, desc = "Format" })
             vim.keymap.set("n", "<leader>ih", function()
                 vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-            end, { desc = "Toggle Inlay Hints " })
+            end, { noremap = true, silent = true, desc = "Toggle Inlay Hints " })
         end,
     },
 
@@ -212,7 +228,8 @@ return {
 
         config = function()
             require("lsp_lines").setup()
-            vim.keymap.set("", "<leader>le", require("lsp_lines").toggle, { desc = "Toggle Error" })
+            vim.keymap.set("", "<leader>le", require("lsp_lines").toggle,
+                { noremap = true, silent = true, desc = "Toggle Error" })
             vim.diagnostic.config({
                 virtual_text = false,
             })

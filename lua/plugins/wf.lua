@@ -34,7 +34,6 @@ return {
 			)
 
 			-- Buffer
-			-- Buffer
 			vim.keymap.set(
 				"n",
 				"<leader>wbu",
@@ -58,7 +57,7 @@ return {
 				"n",
 				"<Leader>",
 				which_key({ text_insert_in_advance = "<Leader>" }),
-				{ noremap = true, silent = true, desc = "Which-Wey", buffer = true }
+				{ noremap = true, silent = true, desc = "Which-Key", buffer = true }
 			)
 			-- vim.keymap.set(
 			--     "n",

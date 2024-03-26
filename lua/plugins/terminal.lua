@@ -8,9 +8,6 @@ return {
                 -- size = 20,
                 open_mapping = [[<c-\>]],
                 shading_factor = "5",
-                start_in_insert = true,
-                border = "curved",
-                title_pos = "center",
             })
 
             -- Counts the number of terminals that exist
@@ -26,24 +23,32 @@ return {
                 return terminal_count
             end
 
-            vim.keymap.set("n", "<c-]>", ":ToggleTerm direction=float<cr>", { desc = "Opens a floating terminal" })
+            -- Floating terminal
+            vim.keymap.set("n", "<c-]>", ":ToggleTerm direction=float<cr>", { desc = "Float ToggleTerm" })
             vim.keymap.set("t", "<c-]>",
                 function()
                     vim.cmd("ToggleTerm")
                 end,
-                { desc = "Closes the floating terminal" })
-            vim.keymap.set("n", "<c-\\>", ":ToggleTerm direction=horizontal<cr>", { desc = "Opens a floating terminal" })
-            vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+                { noremap = true, silent = true, desc = "Closes the floating terminal" })
+
+            -- Horizontal terminal
+            vim.keymap.set("n", "<c-\\>", ":ToggleTerm direction=horizontal<cr>",
+                { noremap = true, silent = true, desc = "Horizontal ToggleTerm" })
+            vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true, desc = "t -> n" })
+
+            -- Create new terminals
             vim.keymap.set("n", "<leader>tt", function()
                 local command = CountTerms() + 1 .. "ToggleTerm"
                 vim.cmd(command)
-            end, { desc = "Creates a new ToggleTerm" })
+            end, { noremap = true, silent = true, desc = "New ToggleTerm" })
+
+            -- Close current terminal
             vim.keymap.set("n", "<leader>te", function()
                 if CountTerms() == 0 then
                     return
                 end
                 vim.api.nvim_win_close(vim.api.nvim_get_current_win(), false)
-            end, { desc = "Exits current ToggleTerm" })
-        end
+            end, { noremap = true, silent = true, desc = "Exits current ToggleTerm" })
+        end,
     },
 }
