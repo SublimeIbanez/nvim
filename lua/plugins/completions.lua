@@ -1,6 +1,6 @@
 return {
     {
-        "hrsh7th/cmp-nvim-lsp"
+        "hrsh7th/cmp-nvim-lsp",
     },
     {
         "L3MON4D3/LuaSnip",
@@ -28,10 +28,10 @@ return {
                 },
                 mapping = cmp.mapping.preset.insert({
                     ["<S-tab>"] = cmp.mapping.select_prev_item({
-                        behavior = cmp.SelectBehavior.Select
+                        behavior = cmp.SelectBehavior.Select,
                     }),
                     ["<tab>"] = cmp.mapping.select_next_item({
-                        behavior = cmp.SelectBehavior.Select
+                        behavior = cmp.SelectBehavior.Select,
                     }),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),

@@ -136,7 +136,7 @@ return {
             commands = {},
             window = {
                 position = "right",
-                width = 32,
+                width = 30,
                 mapping_options = {
                     noremap = true,
                     nowait = true,

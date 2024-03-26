@@ -185,12 +185,7 @@ return {
             vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Goto Signature Help" })
             vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto References" })
             vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "Add Workspace Dir" })
-            vim.keymap.set(
-                "n",
-                "<leader>wr",
-                vim.lsp.buf.remove_workspace_folder,
-                { desc = "Remove Workspace Dir" }
-            )
+            vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "Remove Workspace Dir" })
             vim.keymap.set("n", "<leader>wl", function()
                 print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
             end, { desc = "List Workspace Folders" })
@@ -199,10 +194,15 @@ return {
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
             vim.keymap.set("n", "<leader>cf", function()
                 vim.lsp.buf.format({ async = true })
+                vim.cmd("normal! ma")
+                vim.cmd("normal! ggVG")
+                vim.cmd(":retab")
+                vim.cmd("normal! <Esc>")
+                vim.cmd("normal! `a")
             end, { desc = "Format" })
             vim.keymap.set("n", "<leader>ih", function()
                 vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-            end, { desc = "Toggle Inlay Hints "})
+            end, { desc = "Toggle Inlay Hints " })
         end,
     },
 

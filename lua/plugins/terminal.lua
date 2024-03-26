@@ -1,16 +1,16 @@
 return {
-	{
-    	"numToStr/FTerm.nvim",
+    {
+        "numToStr/FTerm.nvim",
 
-		config = function()
+        config = function()
             require("FTerm").setup({
 
-				border = "double",
-				dimensions = {
-					height = 0.7,
-					width = 0.7,
-				},
-			})
+                border = "double",
+                dimensions = {
+                    height = 0.7,
+                    width = 0.7,
+                },
+            })
 
             -- Set up BTOP
             local fterm = require("FTerm")
@@ -24,13 +24,18 @@ return {
                 cmd = "gitui",
             })
             vim.keymap.set("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>', { desc = "Open Terminal" })
-            vim.keymap.set("t", "<C-t>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', { desc = "Hide Terminal" })
+            vim.keymap.set(
+                "t",
+                "<C-t>",
+                '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>',
+                { desc = "Hide Terminal" }
+            )
             vim.keymap.set("t", "<C-b>", function()
                 btop:toggle()
             end, { desc = "Toggle BTOP <In FTerm>" })
             vim.keymap.set("t", "<C-g>", function()
                 gitui:toggle()
             end, { desc = "Toggle GitUI <In FTerm>" })
-		end,
-	},
+        end,
+    },
 }

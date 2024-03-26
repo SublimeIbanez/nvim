@@ -31,7 +31,11 @@ return {
                         search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
                         search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
                         filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-                        lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
+                        lua = {
+                            pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" },
+                            icon = "",
+                            lang = "lua",
+                        },
                         help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
                         input = {}, -- Used by input()
                         -- lua = false, -- to disable a format, set to `false`
@@ -72,7 +76,7 @@ return {
                                 { error = true },
                                 { warning = true },
                                 { event = "msg_show", kind = { "" } },
-                                { event = "lsp", kind = "message" },
+                                { event = "lsp",      kind = "message" },
                             },
                         },
                     },
@@ -86,7 +90,7 @@ return {
                                 { error = true },
                                 { warning = true },
                                 { event = "msg_show", kind = { "" } },
-                                { event = "lsp", kind = "message" },
+                                { event = "lsp",      kind = "message" },
                             },
                         },
                         filter_opts = { count = 1 },
@@ -164,7 +168,7 @@ return {
                 },
                 markdown = {
                     hover = {
-                        ["|(%S-)|"] = vim.cmd.help, -- vim help links
+                        ["|(%S-)|"] = vim.cmd.help,     -- vim help links
                         ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
                     },
                     highlights = {
@@ -196,9 +200,9 @@ return {
                 },
                 throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
                 views = {}, ---@see section on views
-                routes = {}, --- @see section on routes
-                status = {}, --- @see section on statusline components
-                format = {}, --- @see section on formatting
+                routes = {},       --- @see section on routes
+                status = {},       --- @see section on statusline components
+                format = {},       --- @see section on formatting
             })
         end,
     },
