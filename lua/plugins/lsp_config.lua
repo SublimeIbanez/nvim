@@ -23,8 +23,7 @@ return {
                     "csharp_ls",
                     "cssls",
                     "docker_compose_language_service",
-                    "elixirls",
-                    --"erlangls",
+                    "lexical",
                     "gopls",
                     "gradle_ls",
                     "html",
@@ -84,7 +83,7 @@ return {
             lspconfig.docker_compose_language_service.setup({
                 capabilities = capabilities,
             })
-            lspconfig.elixirls.setup({
+            lspconfig.lexical.setup({
                 capabilities = capabilities,
             })
             --lspconfig.erlangls.setup({
