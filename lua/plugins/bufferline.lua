@@ -68,10 +68,10 @@ return {
                     -- end,
                     offsets = {
                         {
-                            filetype = "NvimTree",
+                            filetype = "neo-tree",
                             text = "File Explorer",  --| function ,
-                            text_align = "center", -- | "left" | "right"
-                            separator = true
+                            text_align = "left", -- | "left" | "right" | center
+                            separator = false
                         }
                     },
                     -- color_icons = true, -- | false, -- whether or not to add the filetype icon highlights

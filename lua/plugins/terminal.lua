@@ -23,7 +23,6 @@ return {
                 ft = "fterm_gitui",
                 cmd = "gitui",
             })
-
             vim.keymap.set("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>', { desc = "Open Terminal" })
             vim.keymap.set("t", "<C-t>", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', { desc = "Hide Terminal" })
             vim.keymap.set("t", "<C-b>", function()

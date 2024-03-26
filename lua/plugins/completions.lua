@@ -20,7 +20,6 @@ return {
                 snippet = {
                     expand = function(args)
                         vim.snippet.expand(args.body)
-                        --vim.fn["vsnip#anonymous"](args.body)
                     end,
                 },
                 window = {

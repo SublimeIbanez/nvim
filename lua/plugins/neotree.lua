@@ -134,7 +134,6 @@ return {
             -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
             -- see `:h neo-tree-custom-commands-global`
             commands = {},
-            hijack_netrw_behavior = "open_default",
             window = {
                 position = "right",
                 width = 32,
@@ -313,5 +312,5 @@ return {
             },
         })
     end,
-    vim.keymap.set("n", "<leader>nt", ":Neotree filesystem show right<cr>", { desc = "Open Neotree" }),
+    vim.keymap.set("n", "<leader>nt", ":Neotree filesystem reveal right<cr>", { desc = "Open Neotree" }),
 }
