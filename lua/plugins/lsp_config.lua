@@ -192,7 +192,7 @@ return {
             vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Type Definition" })
             vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename" })
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
-            vim.keymap.set("n", "<leader>cf", function()
+            vim.keymap.set("n", "<leader>fm", function()
                 vim.lsp.buf.format({ async = true })
                 vim.cmd("normal! ma")
                 vim.cmd("normal! ggVG")

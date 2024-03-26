@@ -18,7 +18,6 @@ Autocomplete:
 
 Dashboard:
 - Adjust its position
-- Adjust the theme
 
 Comment:
 - Fix the keybinding issue (still uses gcc and gc instead of <leader>....)

@@ -4,7 +4,7 @@ return {
 
 		config = function()
 			require("wf").setup({
-				theme = "chad", -- default, space, chad
+				theme = "space", -- default, space, chad
 			})
 			local which_key = require("wf.builtin.which_key")
 			local register = require("wf.builtin.register")

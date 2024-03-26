@@ -1,41 +1,49 @@
 return {
     {
-        "numToStr/FTerm.nvim",
+        "akinsho/toggleterm.nvim",
+        version = "*",
 
         config = function()
-            require("FTerm").setup({
-
-                border = "double",
-                dimensions = {
-                    height = 0.7,
-                    width = 0.7,
-                },
+            require("toggleterm").setup({
+                -- size = 20,
+                open_mapping = [[<c-\>]],
+                shading_factor = "5",
+                start_in_insert = true,
+                border = "curved",
+                title_pos = "center",
             })
 
-            -- Set up BTOP
-            local fterm = require("FTerm")
-            local btop = fterm:new({
-                ft = "fterm_btop",
-                cmd = "btop",
-            })
+            -- Counts the number of terminals that exist
+            function CountTerms()
+                local buffers = vim.api.nvim_list_bufs()
+                local terminal_count = 0
 
-            local gitui = fterm:new({
-                ft = "fterm_gitui",
-                cmd = "gitui",
-            })
-            vim.keymap.set("n", "<C-t>", '<CMD>lua require("FTerm").toggle()<CR>', { desc = "Open Terminal" })
-            vim.keymap.set(
-                "t",
-                "<C-t>",
-                '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>',
-                { desc = "Hide Terminal" }
-            )
-            vim.keymap.set("t", "<C-b>", function()
-                btop:toggle()
-            end, { desc = "Toggle BTOP <In FTerm>" })
-            vim.keymap.set("t", "<C-g>", function()
-                gitui:toggle()
-            end, { desc = "Toggle GitUI <In FTerm>" })
-        end,
+                for _, buf in ipairs(buffers) do
+                    if vim.bo[buf].buftype == "terminal" then
+                        terminal_count = terminal_count + 1
+                    end
+                end
+                return terminal_count
+            end
+
+            vim.keymap.set("n", "<c-]>", ":ToggleTerm direction=float<cr>", { desc = "Opens a floating terminal" })
+            vim.keymap.set("t", "<c-]>",
+                function()
+                    vim.cmd("ToggleTerm")
+                end,
+                { desc = "Closes the floating terminal" })
+            vim.keymap.set("n", "<c-\\>", ":ToggleTerm direction=horizontal<cr>", { desc = "Opens a floating terminal" })
+            vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+            vim.keymap.set("n", "<leader>tt", function()
+                local command = CountTerms() + 1 .. "ToggleTerm"
+                vim.cmd(command)
+            end, { desc = "Creates a new ToggleTerm" })
+            vim.keymap.set("n", "<leader>te", function()
+                if CountTerms() == 0 then
+                    return
+                end
+                vim.api.nvim_win_close(vim.api.nvim_get_current_win(), false)
+            end, { desc = "Exits current ToggleTerm" })
+        end
     },
 }
