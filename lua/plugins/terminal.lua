@@ -10,7 +10,7 @@ return {
                 shading_factor = "5",
             })
 
-            -- Counts the number of terminals that exist
+            -- -- Counts the number of terminals that exist
             function CountTerms()
                 local buffers = vim.api.nvim_list_bufs()
                 local terminal_count = 0
