@@ -1,6 +1,6 @@
 return {
     {
-        "hrsh7th/cmp-nvim-lsp"
+        "hrsh7th/cmp-nvim-lsp",
     },
     {
         "L3MON4D3/LuaSnip",
@@ -19,7 +19,7 @@ return {
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
+                        vim.snippet.expand(args.body)
                     end,
                 },
                 window = {
@@ -28,10 +28,10 @@ return {
                 },
                 mapping = cmp.mapping.preset.insert({
                     ["<S-tab>"] = cmp.mapping.select_prev_item({
-                        behavior = cmp.SelectBehavior.Select
+                        behavior = cmp.SelectBehavior.Select,
                     }),
                     ["<tab>"] = cmp.mapping.select_next_item({
-                        behavior = cmp.SelectBehavior.Select
+                        behavior = cmp.SelectBehavior.Select,
                     }),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -40,7 +40,7 @@ return {
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 }),
                 sources = cmp.config.sources({
-                    { name = "luasnip" },
+                    --   { name = "luasnip" },
                     { name = "nvim_lsp" },
                 }, {
                     { name = "buffer" },
