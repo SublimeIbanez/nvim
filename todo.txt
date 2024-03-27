@@ -34,3 +34,8 @@ TreeSitter:
 
 LSP
 - Make the gutter a fixed width
+
+Multicursor:
+- Fix any remaining issues / create issues on their gh
+
+
