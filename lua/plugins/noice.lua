@@ -18,9 +18,9 @@ return {
         config = function()
             require("noice").setup({
                 cmdline = {
-                    enabled = true,   -- enables the Noice cmdline UI
-                    view = "cmdline", -- cmdline | cmdline_popup
-                    opts = {},        -- global options for the cmdline. See section on views
+                    enabled = true,         -- enables the Noice cmdline UI
+                    view = "cmdline_popup", -- cmdline | cmdline_popup
+                    opts = {},              -- global options for the cmdline. See section on views
                     format = {
                         -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
                         -- view: (default is cmdline view)
@@ -36,7 +36,7 @@ return {
                             icon = "",
                             lang = "lua",
                         },
-                        help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+                        help = { pattern = "^:%s*he?l?p?%s+", icon = "" }, --
                         input = {}, -- Used by input()
                         -- lua = false, -- to disable a format, set to `false`
                     },
@@ -110,7 +110,7 @@ return {
                     -- event is always "notify" and kind can be any log level as a string
                     -- The default routes will forward notifications to nvim-notify
                     -- Benefit of using Noice for this is the routing and consistent history view
-                    enabled = false,
+                    enabled = true,
                     view = "notify",
                 },
                 lsp = {

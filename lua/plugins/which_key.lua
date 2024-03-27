@@ -116,7 +116,7 @@ return {
             -- Map the keys as necessary
             local mappings = {
                 [" "] = {
-                    name = "Leader",
+                    name = "Space",
                     c = "Code",
                     d = "Debug",
                     f = "File",
