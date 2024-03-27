@@ -4,7 +4,7 @@ return {
         event = "VeryLazy",
 
         config = function()
-            local status_ok, wk = pcall(require, "which-key")
+            local status_ok, which_key = pcall(require, "which-key")
             if not status_ok then
                 return
             end
@@ -137,9 +137,8 @@ return {
             }
 
 
-            wk.setup(setup)
-            wk.register(mappings, opts)
-        end
-
+            which_key.setup(setup)
+            which_key.register(mappings, opts)
+        end,
     },
 }

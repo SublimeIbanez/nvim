@@ -9,10 +9,8 @@
 
 
 ==Incomplete:
-WF:
-- Make it work again
-- Reposition it if possible
-- Make it start instantly but also have all possible vim keybinds that haven't been remapped
+Which-Key:
+- Reposition/resize
 
 Neotree
 - Get it to open on startup and close properly
@@ -37,5 +35,3 @@ LSP
 
 Multicursor:
 - Fix any remaining issues / create issues on their gh
-
-

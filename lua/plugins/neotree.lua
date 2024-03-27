@@ -149,7 +149,9 @@ return {
 
                 mappings = {
                     ["<space>"] = {
-                        function() end,
+                        function()
+                            vim.cmd("WhichKey<leader>")
+                        end,
                         nowait = false, -- disable nowait if you have existing combos starting with this char that you want to use
                     },
                     ["<2-LeftMouse>"] = "open",
@@ -317,6 +319,6 @@ return {
             },
         })
     end,
-    vim.keymap.set("n", "<leader>nt", ":Neotree toggle<cr>",
+    vim.keymap.set("n", "<leader>pt", ":Neotree toggle<cr>",
         { noremap = true, silent = true, desc = "Open Neotree" }),
 }
