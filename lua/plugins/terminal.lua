@@ -24,31 +24,31 @@ return {
             end
 
             -- Floating terminal
-            vim.keymap.set("n", "<c-]>", ":ToggleTerm direction=float<cr>", { desc = "Float ToggleTerm" })
+            vim.keymap.set("n", "<c-]>", ":ToggleTerm direction=float<cr>", { desc = "Float Terminal" })
             vim.keymap.set("t", "<c-]>",
                 function()
                     vim.cmd("ToggleTerm")
                 end,
-                { noremap = true, silent = true, desc = "Closes the floating terminal" })
+                { noremap = true, silent = true, desc = "Close Terminal" })
 
             -- Horizontal terminal
             vim.keymap.set("n", "<c-\\>", ":ToggleTerm direction=horizontal<cr>",
-                { noremap = true, silent = true, desc = "Horizontal ToggleTerm" })
+                { noremap = true, silent = true, desc = "Horizontal Terminal" })
             vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true, desc = "t -> n" })
 
             -- Create new terminals
-            vim.keymap.set("n", "<leader>tt", function()
+            vim.keymap.set("n", "<leader>tn", function()
                 local command = CountTerms() + 1 .. "ToggleTerm"
                 vim.cmd(command)
-            end, { noremap = true, silent = true, desc = "New ToggleTerm" })
+            end, { noremap = true, silent = true, desc = "New" })
 
             -- Close current terminal
             vim.keymap.set("n", "<leader>te", function()
                 if CountTerms() == 0 then
-                    return
+                    return ""
                 end
                 vim.api.nvim_win_close(vim.api.nvim_get_current_win(), false)
-            end, { noremap = true, silent = true, desc = "Exits current ToggleTerm" })
+            end, { noremap = true, silent = true, desc = "Exits" })
         end,
     },
 }

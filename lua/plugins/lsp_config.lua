@@ -215,9 +215,9 @@ return {
                 vim.cmd("normal! <Esc>")
                 vim.cmd("normal! `a")
             end, { noremap = true, silent = true, desc = "Format" })
-            vim.keymap.set("n", "<leader>ih", function()
+            vim.keymap.set("n", "<leader>ci", function()
                 vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-            end, { noremap = true, silent = true, desc = "Toggle Inlay Hints " })
+            end, { noremap = true, silent = true, desc = "Inlay Hints" })
         end,
     },
 
@@ -227,8 +227,8 @@ return {
 
         config = function()
             require("lsp_lines").setup()
-            vim.keymap.set("", "<leader>le", require("lsp_lines").toggle,
-                { noremap = true, silent = true, desc = "Toggle Error" })
+            vim.keymap.set("", "<leader>cl", require("lsp_lines").toggle,
+                { noremap = true, silent = true, desc = "ErrorLines" })
             vim.diagnostic.config({
                 virtual_text = false,
             })
