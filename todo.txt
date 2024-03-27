@@ -10,7 +10,7 @@
 
 ==Incomplete:
 Which-Key:
-- Reposition/resize
+- Add all the prefixes necessary
 
 Neotree
 - Get it to open on startup and close properly

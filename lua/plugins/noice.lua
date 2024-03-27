@@ -19,7 +19,7 @@ return {
             require("noice").setup({
                 cmdline = {
                     enabled = true,   -- enables the Noice cmdline UI
-                    view = "cmdline_popup", -- cmdline | cmdline_popup
+                    view = "cmdline", -- cmdline | cmdline_popup
                     opts = {},        -- global options for the cmdline. See section on views
                     format = {
                         -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
