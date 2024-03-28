@@ -8,17 +8,16 @@
 - Autocomplete - The best we'll get it
 - TreeSitter
 - LSP
+- Comment
 
 
 ==Incomplete:
 Neotree
 - Interferes with buffer closing -- if I close a buffer it will automatically close the entire session if it's open
+- Needs to update with git
 
 Dashboard:
 - Adjust its position
-
-Comment:
-- Fix the keybinding issue (still uses gcc and gc instead of <leader>....)
 
 Debug:
 - Actually implement / fix it

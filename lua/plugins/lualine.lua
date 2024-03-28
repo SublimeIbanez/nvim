@@ -49,8 +49,7 @@ return {
                 },
 
                 lualine_x = { "filetype", "filename" },
-                lualine_y = {
-                },
+                lualine_y = {},
                 lualine_z = { "location" },
             },
             inactive_sections = {
