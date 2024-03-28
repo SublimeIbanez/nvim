@@ -1,7 +1,8 @@
+-- Before plugins
 require("config")
 require("keymap")
 
--- Fuck you Neotree
+-- Fuck you Neotree (Force close)
 function Quit()
     vim.cmd("quit")
     local buffers = vim.api.nvim_list_bufs()
@@ -21,8 +22,7 @@ function Quit()
 end
 vim.keymap.set("n", "<leader>ee", Quit, { noremap = true, silent = true, desc = "Quit" })
 
-
-
+-- Lazy Plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({

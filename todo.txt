@@ -9,6 +9,7 @@
 - TreeSitter
 - LSP
 - Comment
+- Indent-Lines
 
 
 ==Incomplete:
@@ -23,5 +24,4 @@ Debug:
 - Actually implement / fix it
 
 Multicursor:
-- Pair completion for delimiters doesn't work well
 - Make it so lines can be skipped

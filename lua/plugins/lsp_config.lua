@@ -15,6 +15,7 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
+                    "ast_grep",
                     "angularls",
                     "arduino_language_server",
                     "asm_lsp",
@@ -23,7 +24,7 @@ return {
                     "csharp_ls",
                     "cssls",
                     "docker_compose_language_service",
-                    "lexical",
+                    "elixirls",
                     "gopls",
                     "gradle_ls",
                     "html",
@@ -227,7 +228,7 @@ return {
 
         config = function()
             require("lsp_lines").setup()
-            vim.keymap.set("", "<leader>cl", require("lsp_lines").toggle,
+            vim.keymap.set("", "<leader>ce", require("lsp_lines").toggle,
                 { noremap = true, silent = true, desc = "ErrorLines" })
             vim.diagnostic.config({
                 virtual_text = false,

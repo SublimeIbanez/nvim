@@ -17,3 +17,13 @@ vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { noremap = true, silent = true, de
 vim.keymap.set({ "n", "v" }, "gl", "$", { noremap = true, silent = true, desc = "Goto end of Line" })
 vim.keymap.set({ "n", "v" }, "gh", "^", { noremap = true, silent = true, desc = "Goto end of Line" })
 vim.keymap.set({ "n", "v" }, "<leader>yc", [["+y]], { noremap = true, silent = true, desc = "Clipboard" })
+
+-- Help
+vim.keymap.set({ "n" }, "<leader>?s", "<cmd>:h nvim-surround.usage<cr>",
+    { noremap = true, silent = true, desc = "Surround" })
+vim.keymap.set({ "n" }, "<leader>?n", "<cmd>:h neo-tree<cr>",
+    { noremap = true, silent = true, desc = "Neotree" })
+vim.keymap.set({ "n" }, "<leader>?t", "<cmd>:h telescope.nvim<cr>",
+    { noremap = true, silent = true, desc = "Telescope" })
+
+

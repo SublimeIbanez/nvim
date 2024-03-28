@@ -71,8 +71,10 @@ return {
                     filetypes = {
                         "dashboard"
                     },
-                }
+                },
             })
+
+            vim.keymap.set({ "n", "v" }, "<leader>cl", ":IBLToggle<cr>", { noremap = true, silent = true, desc = "Toggle Lines" })
         end,
     },
 }
