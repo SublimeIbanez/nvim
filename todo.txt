@@ -25,3 +25,6 @@ Debug:
 
 Multicursor:
 - Make it so lines can be skipped
+
+Pets:
+- I want vscode pets :<
