@@ -126,6 +126,8 @@ return {
                     n = "Swap",
                     t = "Terminal",
                     w = "Workspace",
+                    y = "Yank",
+                    ["?"] = "Help",
                 }
             }
 

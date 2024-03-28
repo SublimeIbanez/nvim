@@ -33,7 +33,7 @@ return {
                     "jdtls", -- "java_language_server"
                     "tsserver",
                     "kotlin_language_server",
-                    "ltex",
+                    --"ltex",
                     "lua_ls",
                     "marksman",
                     --"ocamllsp",
@@ -116,9 +116,9 @@ return {
             lspconfig.kotlin_language_server.setup({
                 capabilities = capabilities,
             })
-            lspconfig.ltex.setup({
-                capabilities = capabilities,
-            })
+            -- lspconfig.ltex.setup({
+            --     capabilities = capabilities,
+            -- })
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
             })

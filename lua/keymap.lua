@@ -16,3 +16,4 @@ vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { noremap = true, silent = true, de
 -- Quick navigation of a line
 vim.keymap.set({ "n", "v" }, "gl", "$", { noremap = true, silent = true, desc = "Goto end of Line" })
 vim.keymap.set({ "n", "v" }, "gh", "^", { noremap = true, silent = true, desc = "Goto end of Line" })
+vim.keymap.set({ "n", "v" }, "<leader>yc", [["+y]], { noremap = true, silent = true, desc = "Clipboard" })

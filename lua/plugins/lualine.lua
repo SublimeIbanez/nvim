@@ -39,9 +39,18 @@ return {
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_c = { "hostname" },
+                lualine_c = { "hostname",
+                    {
+
+                        require("noice").api.statusline.mode.get,
+                        cond = require("noice").api.statusline.mode.has,
+                        color = { fg = "#ba9dff" },
+                    }
+                },
+
                 lualine_x = { "fileformat", "filetype", "filename" },
-                lualine_y = { "progress" },
+                lualine_y = {
+                },
                 lualine_z = { "location" },
             },
             inactive_sections = {
