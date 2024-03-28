@@ -6,3 +6,4 @@ vim.cmd("set shiftwidth=4")
 vim.cmd("set signcolumn=yes")
 vim.opt.number = true
 vim.opt.termguicolors = true
+vim.o.scrolloff = 5
