@@ -5,7 +5,7 @@
 - Telescope
 - Theme
 - Which-Key
-- Autocomplete - The best we'll get it
+- Autocomplete
 - TreeSitter
 - LSP
 - Comment

@@ -16,14 +16,14 @@ return {
                     ---Line-comment toggle keymap
                     line = "<leader>cci",
                     ---Block-comment toggle keymap
-                    block = "<leader>cbi", --"<leader>gcb",
+                    block = "<leader>ccI", --"<leader>gcb",
                 },
                 ---LHS of operator-pending mappings in NORMAL and VISUAL mode
                 opleader = {
                     ---Line-comment keymap
                     line = "<leader>cca",
                     ---Block-comment keymap
-                    block = "<leader>cba",
+                    block = "<leader>ccA",
                 },
                 ---LHS of extra mappings
                 extra = {
