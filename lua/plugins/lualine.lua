@@ -39,7 +39,7 @@ return {
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = { "branch", "diff", "diagnostics" },
-                lualine_c = { "hostname",
+                lualine_c = { "hostname", "fileformat",
                     {
 
                         require("noice").api.statusline.mode.get,
@@ -48,7 +48,7 @@ return {
                     }
                 },
 
-                lualine_x = { "fileformat", "filetype", "filename" },
+                lualine_x = { "filetype", "filename" },
                 lualine_y = {
                 },
                 lualine_z = { "location" },
