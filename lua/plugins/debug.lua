@@ -28,39 +28,7 @@ return {
 
             -- Adapter / Config
             -- Golang
-            dap.adapters.delve = {
-                type = 'server',
-                port = '${port}',
-                executable = {
-                    command = 'dlv',
-                    args = { 'dap', '-l', '127.0.0.1:${port}' },
-                }
-            }
-
-            -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
-            dap.configurations.go = {
-                {
-                    type = "delve",
-                    name = "Debug",
-                    request = "launch",
-                    program = "${file}"
-                },
-                {
-                    type = "delve",
-                    name = "Debug test", -- configuration for debugging test files
-                    request = "launch",
-                    mode = "test",
-                    program = "${file}"
-                },
-                -- works with go.mod packages and sub packages
-                {
-                    type = "delve",
-                    name = "Debug test (go.mod)",
-                    request = "launch",
-                    mode = "test",
-                    program = "./${relativeFileDirname}"
-                }
-            }
+            require("dap-go").setup()
 
             -- C / C++ / Rust
             dap.adapters.cppdbg = {
@@ -114,9 +82,11 @@ return {
 
             -- Keymap
             vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint,
-                { noremap = true, silent = true, desc = "Toggle Breakpoint" })
-            vim.keymap.set("n", "<leader>dc", dap.continue,
-                { noremap = true, silent = true, desc = "Continue" })
+                { noremap = true, silent = true, desc = "Breakpoint" })
+            vim.keymap.set("n", "<leader>dd", dap.continue,
+                { noremap = true, silent = true, desc = "Start/Stop/Continue" })
+            vim.keymap.set("n", "<leader>dt", dapui.toggle,
+                { noremap = true, silent = true, desc = "ToggleUI" })
         end,
     },
 }
