@@ -229,15 +229,24 @@ return {
             lines.setup()
 
             -- Disable inlay error
+            -- COMMENT TO ENABLE INLAY ERROR AT START
             vim.diagnostic.config({
                 virtual_text = false,
             })
+
+            -- UNCOMMENT TO DISABLE LINES AT START
+            -- vim.api.nvim_create_autocmd("VimEnter", {
+            --     callback = function()
+            --         lines.toggle()
+            --     end
+            -- })
+
+            -- Toggle inlay
             function ToggleInlay()
                 local current_config = vim.diagnostic.config()
                 local enabled = not (current_config.virtual_text == false)
                 vim.diagnostic.config({ virtual_text = not enabled })
             end
-
             -- Change error display from lines to inlay
             vim.keymap.set({ "n", "v" }, "<leader>cs",
                 function()

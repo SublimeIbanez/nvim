@@ -112,7 +112,7 @@ return {
                     -- function(buffer_a, buffer_b)
                     -- add custom logic
                     -- return buffer_a.modified > buffer_b.modified
-                    sort_by = "insert_at_end",
+                    sort_by = "id",
                 },
             })
         end,
