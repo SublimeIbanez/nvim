@@ -170,6 +170,9 @@ return {
                     ["p"] = "Open",
                     ["?"] = "Help",
                 },
+                ["g"] = {
+                    name = "Goto"
+                }
             }
 
             -- Options

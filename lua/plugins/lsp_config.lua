@@ -173,52 +173,45 @@ return {
             })
 
             -- global kepmaps
-            vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover,
+            vim.keymap.set("n", "<leader>ck", vim.lsp.buf.hover,
                 { noremap = true, silent = true, desc = "Display LSP Info" })
             vim.keymap.set("n", "gd", vim.lsp.buf.definition,
-                { noremap = true, silent = true, desc = "Goto Definition" })
+                { noremap = true, silent = true, desc = "Definition" })
             vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
-                { noremap = true, silent = true, desc = "Goto Declaration" })
+                { noremap = true, silent = true, desc = "Declaration" })
             vim.keymap.set("n", "gr", vim.lsp.buf.references,
-                { noremap = true, silent = true, desc = "Goto References" })
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,
+                { noremap = true, silent = true, desc = "References" })
+            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,
                 { noremap = true, silent = true, desc = "Code Actions" })
-            vim.keymap.set("n", "<space>cd", vim.diagnostic.open_float,
-                { noremap = true, silent = true, desc = "Open Diagnostics" })
+            vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float,
+                { noremap = true, silent = true, desc = "Hover Diagnostics" })
             vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
-                { noremap = true, silent = true, desc = "Goto Prev Diagnostic" })
+                { noremap = true, silent = true, desc = "Prev Diagnostic" })
             vim.keymap.set("n", "]d", vim.diagnostic.goto_next,
-                { noremap = true, silent = true, desc = "Goto Next Diagnostic" })
+                { noremap = true, silent = true, desc = "Next Diagnostic" })
             vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
-                { noremap = true, silent = true, desc = "Goto Implementation" })
+                { noremap = true, silent = true, desc = "Implementation" })
             vim.keymap.set("n", "gs", vim.lsp.buf.signature_help,
-                { noremap = true, silent = true, desc = "Goto Signature Help" })
-            vim.keymap.set("n", "gr", vim.lsp.buf.references,
-                { noremap = true, silent = true, desc = "Goto References" })
+                { noremap = true, silent = true, desc = "Signature Help" })
             vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder,
                 { noremap = true, silent = true, desc = "Add Workspace Dir" })
             vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder,
                 { noremap = true, silent = true, desc = "Remove Workspace Dir" })
-            vim.keymap.set("n", "<leader>wl", function()
-                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-            end, { noremap = true, silent = true, desc = "List Workspace Folders" })
-            vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition,
+            vim.keymap.set("n", "<leader>wl",
+                function()
+                    vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                end,
+                { noremap = true, silent = true, desc = "List Workspace Folders" })
+            vim.keymap.set("n", "<leader>cD", vim.lsp.buf.type_definition,
                 { noremap = true, silent = true, desc = "Type Definition" })
             vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename,
                 { noremap = true, silent = true, desc = "Rename" })
-            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,
-                { noremap = true, silent = true, desc = "Code Action" })
             vim.keymap.set("n", "<leader>fm", function()
                 vim.lsp.buf.format({ async = true })
-                vim.cmd("normal! ma")
-                vim.cmd("normal! ggVG")
-                vim.cmd(":retab")
-                vim.cmd("normal! <Esc>")
-                vim.cmd("normal! `a")
             end, { noremap = true, silent = true, desc = "Format" })
             vim.keymap.set("n", "<leader>ci", function()
                 vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-            end, { noremap = true, silent = true, desc = "Inlay Hints" })
+            end, { noremap = true, silent = true, desc = "Toggle Inlay Hints" })
         end,
     },
 
@@ -240,16 +233,20 @@ return {
                 vim.diagnostic.config({ virtual_text = not enabled })
             end
 
-            -- Set the action to turn off the lines and enable inlay
-            vim.keymap.set({ "n", "v" }, "<leader>ce",
+            -- Change error display from lines to inlay
+            vim.keymap.set({ "n", "v" }, "<leader>cs",
                 function()
                     -- Toggle under lines
                     lines.toggle()
-
                     -- Toggle inlay error
                     ToggleInlay()
                 end,
-                { noremap = true, silent = true, desc = "ErrorLines" })
+                { noremap = true, silent = true, desc = "Switch Error Display" })
+
+            -- Turn off lines
+            vim.keymap.set({ "n", "v" }, "<leader>ce", function() lines.toggle() end,
+                { noremap = true, silent = true, desc = "Toggle Lines Error" })
+
             -- Action to toggle inline error alone
             vim.keymap.set(
                 { "n", "v" },
