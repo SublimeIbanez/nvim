@@ -20,6 +20,7 @@ function Quit()
         vim.cmd("quit")
     end
 end
+
 vim.keymap.set("n", "<leader>ee", Quit, { noremap = true, silent = true, desc = "Quit" })
 
 -- Lazy Plugins
@@ -39,5 +40,17 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {}
 require("lazy").setup("plugins", opts)
 
-
-
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--     callback = function()
+--         vim.keymap.set(
+--             { "n", "v" },
+--             "<leader>ct",
+--             function()
+--                 local current_config = vim.diagnostic.config()
+--                 local enabled = not (current_config.virtual_text == false)
+--                 vim.diagnostic.config({ virtual_text = not enabled })
+--             end,
+--             { noremap = true, silent = true, desc = "Toggle Inline Error" }
+--         )
+--     end
+-- })

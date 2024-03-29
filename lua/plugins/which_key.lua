@@ -118,6 +118,7 @@ return {
                     filetypes = {},
                 },
             }
+            which_key.setup(setup)
 
             -- Map the keys as necessary
             local mappings = {
@@ -143,7 +144,7 @@ return {
 
             -- Options
             local opts = {
-                mode = "n", -- NORMAL mode
+                mode = { "n" }, -- NORMAL mode
                 -- prefix: use "<leader>f" for example for mapping everything related to finding files
                 -- the prefix is prepended to every mapping part of `mappings`
                 prefix = "",
@@ -155,8 +156,35 @@ return {
             }
 
 
-            which_key.setup(setup)
             which_key.register(mappings, opts)
+
+            local visual_mappings = {
+                [" "] = {
+                    name = "Space",
+                    ["c"] = { --
+                        name = "Code",
+                        ["c"] = "Comment"
+                    },
+                    ["g"] = "Goto",
+                    ["y"] = "Yank",
+                    ["p"] = "Open",
+                    ["?"] = "Help",
+                },
+            }
+
+            -- Options
+            local visual_opts = {
+                mode = { "v" }, -- NORMAL mode
+                -- prefix: use "<leader>f" for example for mapping everything related to finding files
+                -- the prefix is prepended to every mapping part of `mappings`
+                prefix = "",
+                buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+                silent = true,  -- use `silent` when creating keymaps
+                noremap = true, -- use `noremap` when creating keymaps
+                nowait = false, -- use `nowait` when creating keymaps
+                expr = false,   -- use `expr` when creating keymaps
+            }
+            which_key.register(visual_mappings, visual_opts)
         end
     },
 }
