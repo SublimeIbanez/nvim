@@ -18,13 +18,17 @@ return {
         "lsproule/git_lines",
 
         config = function()
-            vim.keymap.set("v", "<leader>pg", function()
-                vim.cmd("GitLink true")
-            end)
+            vim.keymap.set("v", "<leader>pg",
+                function()
+                    vim.cmd("GitLink true")
+                end,
+                { noremap = true, silent = true, desc = "GitLink" })
 
-            vim.keymap.set("n", "<Leader>pg", function()
-                vim.cmd("GitLink")
-            end)
+            vim.keymap.set("n", "<Leader>pg",
+                function()
+                    vim.cmd("GitLink")
+                end,
+                { noremap = true, silent = true, desc = "GitLink Selection" })
         end,
     },
 }

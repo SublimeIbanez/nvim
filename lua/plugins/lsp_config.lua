@@ -206,12 +206,17 @@ return {
                 { noremap = true, silent = true, desc = "Type Definition" })
             vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename,
                 { noremap = true, silent = true, desc = "Rename" })
-            vim.keymap.set("n", "<leader>fm", function()
-                vim.lsp.buf.format({ async = true })
-            end, { noremap = true, silent = true, desc = "Format" })
-            vim.keymap.set("n", "<leader>ci", function()
-                vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
-            end, { noremap = true, silent = true, desc = "Toggle Inlay Hints" })
+            vim.keymap.set("n", "<leader>fm",
+                function()
+                    vim.lsp.buf.format({ async = true })
+                    vim.cmd("%retab")
+                end,
+                { noremap = true, silent = true, desc = "Format" })
+            vim.keymap.set("n", "<leader>ci",
+                function()
+                    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+                end,
+                { noremap = true, silent = true, desc = "Toggle Inlay Hints" })
         end,
     },
 
