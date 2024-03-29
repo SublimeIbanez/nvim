@@ -16,6 +16,8 @@ vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { noremap = true, silent = true, de
 -- Quick navigation of a line
 vim.keymap.set({ "n", "v" }, "gl", "$", { noremap = true, silent = true, desc = "Goto end of Line" })
 vim.keymap.set({ "n", "v" }, "gh", "^", { noremap = true, silent = true, desc = "Goto end of Line" })
+
+-- 
 vim.keymap.set({ "n", "v" }, "<leader>yc", [["+y]], { noremap = true, silent = true, desc = "Clipboard" })
 
 -- Help
@@ -41,3 +43,17 @@ vim.keymap.set({ "n", "v" }, "<leader>?w", "<cmd>:h which-key.nvim.txt<cr>",
     { noremap = true, silent = true, desc = "Which-Key" })
 vim.keymap.set({ "n", "v" }, "<leader>?D", "<cmd>:h dashboard.txt<cr>",
     { noremap = true, silent = true, desc = "Dashboard" })
+
+-- Whitespace
+vim.keymap.set({ "n", "v" }, "<leader>cw",
+    function()
+        vim.wo.list = not vim.wo.list
+    end,
+    { noremap = true, silent = true, desc = "Toggle Whitespace" })
+
+-- Relative Numbers
+vim.keymap.set({ "n", "v" }, "<leader>cr",
+    function()
+        vim.wo.relativenumber = not vim.wo.relativenumber
+    end,
+    { noremap = true, silent = true, desc = "Toggle Relative Number" })
