@@ -1,5 +1,6 @@
 -- <https://github.com/brenton-leighton/multiple-cursors.nvim>
 return {
+    -- Multi Cursors / Multiple Cursors
     {
         "brenton-leighton/multiple-cursors.nvim",
         version = "*",
@@ -43,13 +44,13 @@ return {
                         end
                     end,
                 },
-                pre_hook = function()
-                    vim.g.minipairs_disable = true
-                end,
-                post_hook = function()
-                    vim.g.minipairs_disable = false
-                end,
             },
+            pre_hook = function()
+                vim.g.minipairs_disable = true
+            end,
+            post_hook = function()
+                vim.g.minipairs_disable = false
+            end,
         },
         keys = {
             { "<C-j>",         "<cmd>MultipleCursorsAddDown<cr>",        mode = { "n", "v" } },

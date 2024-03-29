@@ -1,4 +1,5 @@
 return {
+    -- Telescope
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.6",
@@ -18,6 +19,8 @@ return {
                 { noremap = true, silent = true, desc = "Find Help Tags" })
         end,
     },
+
+    -- Telescope UI
     {
         "nvim-telescope/telescope-ui-select.nvim",
 

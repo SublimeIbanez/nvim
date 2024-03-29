@@ -1,7 +1,10 @@
 return {
+    -- Initial LSP
     {
         "hrsh7th/cmp-nvim-lsp",
     },
+
+    -- LuaSnip
     {
         "L3MON4D3/LuaSnip",
         dependencies = {
@@ -9,6 +12,8 @@ return {
             "rafamadriz/friendly-snippets",
         },
     },
+
+    -- Completions CMP
     {
         "hrsh7th/nvim-cmp",
 
@@ -42,7 +47,20 @@ return {
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-space>"] = cmp.mapping.abort(-4),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    ["<CR>"] = function(fallback)
+                        if cmp.visible() then
+                            if cmp.get_selected_entry() then
+                                cmp.confirm({
+                                    behavior = cmp.ConfirmBehavior.Replace,
+                                    select = true
+                                })
+                            else
+                                fallback()
+                            end
+                        else
+                            fallback()
+                        end
+                    end,
                 }),
                 sources = cmp.config.sources({
                     --   { name = "luasnip" },

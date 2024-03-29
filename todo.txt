@@ -2,36 +2,29 @@
 - ToggleTerm
 - Bufferline
 - Lualine
-- NoneLs
 - Telescope
-- General
 - Theme
+- Which-Key
+- Autocomplete
+- TreeSitter
+- LSP
+- Comment
+- Indent-Lines
 
 
 ==Incomplete:
-Which-Key:
-- Add all the prefixes necessary
-
 Neotree
-- Get it to open on startup and close properly
-
-Autocomplete:
-- If possible, make it so I have to tab into it to allow for autocompletion
+- Interferes with buffer closing -- if I close a buffer it will automatically close the entire session if it's open
+- Needs to update with git
 
 Dashboard:
 - Adjust its position
 
-Comment:
-- Fix the keybinding issue (still uses gcc and gc instead of <leader>....)
-
 Debug:
 - Actually implement / fix it
 
-TreeSitter:
-- Make indent lines work with the dashboard
-
-LSP
-- Make the gutter a fixed width
-
 Multicursor:
-- Fix any remaining issues / create issues on their gh
+- Make it so lines can be skipped
+
+Pets:
+- I want vscode pets :<

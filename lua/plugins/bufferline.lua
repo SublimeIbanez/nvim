@@ -1,4 +1,5 @@
 return {
+    -- Bufferline
     {
         "akinsho/bufferline.nvim",
         version = "*",
@@ -29,12 +30,13 @@ return {
                     --- Please note some names can/will break the
                     --- bufferline so use this at your discretion knowing that it has
                     --- some limitations that will *NOT* be fixed.
-                    -- name_formatter = function(_)   -- (buf) contains:
+                    --  name_formatter = function(_)   -- (buf) contains:
                     --     -- name                | str        | the basename of the active file
                     --     -- path                | str        | the full path of the active file
                     --     -- bufnr (buffer only) | int        | the number of the active buffer
                     --     -- buffers (tabs only) | table(int) | the numbers of the buffers in the tab
-                    --     -- tabnr (tabs only)   | int        | the "handle" of the tab, can be converted to its ordinal number using: `vim.api.nvim_tabpage_get_number(buf.tabnr)`
+                    --     -- tabnr (tabs only)   | int        | the "handle" of the tab, can be converted to its ordinal number using: 
+                    --                                               `vim.api.nvim_tabpage_get_number(buf.tabnr)`
                     -- end,
                     -- max_name_length = 18,
                     -- max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
@@ -70,7 +72,7 @@ return {
                         {
                             filetype = "neo-tree",
                             text = "File Explorer", --| function ,
-                            text_align = "left", -- | "left" | "right" | center
+                            text_align = "left",    -- | "left" | "right" | center
                             separator = false,
                         },
                     },
@@ -96,21 +98,26 @@ return {
                     -- move_wraps_at_ends = false, -- whether or not the move command "wraps" at the first or last position
                     -- -- can also be a table containing 2 custom separators
                     -- -- [focused and unfocused]. eg: { '|', '|' }
-                    separator_style = "slant", -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
+                    separator_style = "slant",     -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
                     -- enforce_regular_tabs = false, -- | true,
-                    -- always_show_bufferline = true, -- | false,
+                    always_show_bufferline = true, -- | false,
                     -- hover = {
                     --     enabled = true,
                     --     delay = 200,
                     --     reveal = {'close'}
                     -- },
-                    -- sort_by = 'insert_at_end', --|'insert_after_current' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+
+                    -- sort_by = ...
+                    -- insert_at_end, insert_after_current, id, extension, relative_directory, directory, tabs,
+                    -- function(buffer_a, buffer_b)
                     -- add custom logic
                     -- return buffer_a.modified > buffer_b.modified
+                    sort_by = "insert_at_end",
                 },
             })
         end,
         vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" }),
-        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true, desc = "Previous Buffer" }),
+        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
+            { noremap = true, silent = true, desc = "Previous Buffer" }),
     },
 }
