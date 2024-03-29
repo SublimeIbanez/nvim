@@ -12,10 +12,6 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 50
 
-            function Width()
-                return vim.api.nvim_win_get_width(0) - (50 + 35);
-            end
-
             -- Custom setup
             local setup = {
                 plugins = {
@@ -64,7 +60,7 @@ return {
                 window = {
                     border = "none",            -- none, single, double, shadow
                     position = "bottom",        -- bottom, top
-                    margin = { 1, 0, 1, Width() }, -- [top, right, bottom, left]. Between 0 and 1 will be treated as a percentage
+                    margin = { 1, 0, 1, 0.55 }, -- [top, right, bottom, left]. Between 0 and 1 will be treated as a percentage
                     padding = { 1, 2, 1, 2 },   -- extra window padding [top, right, bottom, left]
                     winblend = 20,              -- value between 0-100 0 for fully opaque and 100 for fully transparent
                     zindex = 1000,              -- positive value to position WhichKey above other floating windows.
