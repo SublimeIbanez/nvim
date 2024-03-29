@@ -1,7 +1,10 @@
 return {
+    -- Initial LSP
     {
         "hrsh7th/cmp-nvim-lsp",
     },
+
+    -- LuaSnip
     {
         "L3MON4D3/LuaSnip",
         dependencies = {
@@ -9,6 +12,8 @@ return {
             "rafamadriz/friendly-snippets",
         },
     },
+
+    -- Completions CMP
     {
         "hrsh7th/nvim-cmp",
 

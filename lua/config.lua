@@ -1,3 +1,4 @@
+-- Base configuration
 vim.cmd("set termguicolors")
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")

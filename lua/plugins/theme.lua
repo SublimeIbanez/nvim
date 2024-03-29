@@ -1,4 +1,5 @@
 return {
+    -- Nightfox
     {
         "EdenEast/nightfox.nvim",
         lazy = false,
@@ -74,7 +75,8 @@ return {
                 },
             })
 
-            vim.keymap.set({ "n", "v" }, "<leader>cl", ":IBLToggle<cr>", { noremap = true, silent = true, desc = "Toggle Lines" })
+            vim.keymap.set({ "n", "v" }, "<leader>cl", ":IBLToggle<cr>",
+                { noremap = true, silent = true, desc = "Toggle Lines" })
         end,
     },
 }

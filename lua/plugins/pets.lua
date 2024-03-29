@@ -1,4 +1,5 @@
 return {
+    -- Neovim Pets
     {
         "giusgad/pets.nvim",
         dependencies = {

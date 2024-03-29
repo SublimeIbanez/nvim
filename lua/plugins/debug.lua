@@ -1,4 +1,5 @@
 return {
+    -- Debugger / DAP
     {
         "mfussenegger/nvim-dap",
 

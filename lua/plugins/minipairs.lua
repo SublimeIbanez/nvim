@@ -1,4 +1,5 @@
 return {
+    -- Mini Pairs / Auto Pairs
     {
         "echasnovski/mini.nvim",
         version = false,

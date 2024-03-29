@@ -1,5 +1,6 @@
 -- <https://github.com/brenton-leighton/multiple-cursors.nvim>
 return {
+    -- Multi Cursors / Multiple Cursors
     {
         "brenton-leighton/multiple-cursors.nvim",
         version = "*",

@@ -1,4 +1,5 @@
 return {
+    -- Comments
     {
         "numToStr/Comment.nvim",
         lazy = false,
