@@ -25,7 +25,7 @@ return {
             end
 
             -- Floating terminal
-            vim.keymap.set("n", "<c-]>", ":ToggleTerm direction=float<cr>", { desc = "Float Terminal" })
+            vim.keymap.set("n", "<c-]>", ":ToggleTerm direction=float<cr>", { silent = true, desc = "Float Terminal" })
             vim.keymap.set("t", "<c-]>",
                 function()
                     vim.cmd("ToggleTerm")

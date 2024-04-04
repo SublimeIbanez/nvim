@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>pv", ":Ex<CR>", { noremap = true, silent = true, de
 vim.keymap.set({ "n", "v" }, "gl", "$", { noremap = true, silent = true, desc = "Goto end of Line" })
 vim.keymap.set({ "n", "v" }, "gh", "^", { noremap = true, silent = true, desc = "Goto end of Line" })
 
--- 
+--
 vim.keymap.set({ "n", "v" }, "<leader>yc", [["+y]], { noremap = true, silent = true, desc = "Clipboard" })
 
 -- Help
@@ -57,3 +57,6 @@ vim.keymap.set({ "n", "v" }, "<leader>cr",
         vim.wo.relativenumber = not vim.wo.relativenumber
     end,
     { noremap = true, silent = true, desc = "Toggle Relative Number" })
+
+vim.keymap.set({ "n", "v" }, "<leader>pd", "<cmd>Dashboard<cr>",
+    { noremap = true, silent = true, desc = "Dashboard" })

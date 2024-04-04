@@ -17,6 +17,8 @@ return {
                 { noremap = true, silent = true, desc = "Find Buffer" })
             vim.keymap.set("n", "<leader>fh", builtin.help_tags,
                 { noremap = true, silent = true, desc = "Find Help Tags" })
+            vim.keymap.set("n", "<leader>co", builtin.diagnostics,
+                { noremap = true, silent = true, desc = "Diagnostics List" })
         end,
     },
 
@@ -26,6 +28,21 @@ return {
 
         config = function()
             require("telescope").setup({
+                defaults = {
+                    vimgrep_arguments = {
+                        "rg",
+                        -- "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
+                        -- "--trim"     -- add this value
+                    },
+                    layout_config = {
+                        vertical = { width = 0.7 }
+                    },
+                },
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_dopdown,

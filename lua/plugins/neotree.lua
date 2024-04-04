@@ -150,7 +150,7 @@ return {
                     },
 
                     mappings = {
-                        ["<space>"] = {
+                        ["<leader>"] = {
                             function()
                                 vim.cmd("WhichKey<leader>")
                             end,

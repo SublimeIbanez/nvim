@@ -19,7 +19,7 @@ return {
                         desc = "Open Dashboard",
                         group = "",
                         key = "<leader>pd",
-                        action = ":Dashboard<cr>"
+                        action = "<cmd>Dashboard<cr>"
                     },
                 },
                 packages = { -- show how many plugins neovim loaded
