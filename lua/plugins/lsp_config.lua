@@ -8,6 +8,47 @@ return {
         end,
     },
 
+    -- conform formatter
+    {
+        "stevearc/conform.nvim",
+
+        event = { "BufReadPre", "BufNewFile" },
+
+        config = function()
+            local conform = require("conform")
+
+            conform.setup({
+                formatters_by_ft = {
+                    javascript = { "prettier" },
+                    typescript = { "prettier" },
+                    javascriptreact = { "prettier" },
+                    typescriptreact = { "prettier" },
+                    svelte = { "prettier" },
+                    css = { "prettier" },
+                    html = { "prettier" },
+                    json = { "prettier" },
+                    yaml = { "prettier" },
+                    markdown = { "prettier" },
+                    graphql = { "prettier" },
+                },
+                default_format_opts = {
+                    lsp_format = "fallback",
+                },
+                format_on_save = {
+                    lsp_fallback = true,
+                    async = false,
+                    timeout_ms = 500,
+                },
+            })
+
+            vim.keymap.set("n", "<leader>fm",
+                function()
+                    conform.format({ async = true })
+                end,
+                { noremap = true, silent = true, desc = "Format" })
+        end,
+    },
+
     -- Add LSP configurations
     {
         "williamboman/mason-lspconfig.nvim",
@@ -18,17 +59,17 @@ return {
                     "ast_grep",
                     "angularls",
                     "arduino_language_server",
-                    "asm_lsp",
+                    --"asm_lsp",
                     "bashls",
                     "clangd",
-                    "csharp_ls",
+                    --"csharp_ls",
                     "cssls",
                     "docker_compose_language_service",
                     "elixirls",
                     "gopls",
                     "gradle_ls",
                     "html",
-                    "htmx",
+                    --"htmx",
                     --"hls",
                     "jsonls",
                     "jdtls", -- "java_language_server"
@@ -66,21 +107,21 @@ return {
             lspconfig.arduino_language_server.setup({
                 capabilities = capabilities,
             })
-            lspconfig.asm_lsp.setup({
-                capabilities = capabilities,
-            })
+            -- lspconfig.asm_lsp.setup({
+            --     capabilities = capabilities,
+            -- })
             lspconfig.bashls.setup({
                 capabilities = capabilities,
             })
             lspconfig.clangd.setup({
                 capabilities = capabilities,
             })
-            lspconfig.csharp_ls.setup({
-                capabilities = capabilities,
-            })
-            lspconfig.omnisharp.setup({
-                capabilities = capabilities,
-            })
+            -- lspconfig.csharp_ls.setup({
+            --     capabilities = capabilities,
+            -- })
+            -- lspconfig.omnisharp.setup({
+            --     capabilities = capabilities,
+            -- })
             lspconfig.cssls.setup({
                 capabilities = capabilities,
             })
@@ -102,9 +143,9 @@ return {
             lspconfig.html.setup({
                 capabilities = capabilities,
             })
-            lspconfig.htmx.setup({
-                capabilities = capabilities,
-            })
+            -- lspconfig.htmx.setup({
+            --     capabilities = capabilities,
+            -- })
             --lspconfig.hls.setup({
             --capabilities = capabilities
             --})
@@ -209,12 +250,6 @@ return {
                 { noremap = true, silent = true, desc = "Type Definition" })
             vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename,
                 { noremap = true, silent = true, desc = "Rename" })
-            vim.keymap.set("n", "<leader>fm",
-                function()
-                    vim.lsp.buf.format({ async = true })
-                    vim.cmd("%retab")
-                end,
-                { noremap = true, silent = true, desc = "Format" })
             vim.keymap.set("n", "<leader>ci",
                 function()
                     vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
@@ -250,6 +285,7 @@ return {
                 local enabled = not (current_config.virtual_text == false)
                 vim.diagnostic.config({ virtual_text = not enabled })
             end
+
             -- Change error display from lines to inlay
             vim.keymap.set({ "n", "v" }, "<leader>cs",
                 function()
