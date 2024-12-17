@@ -72,7 +72,7 @@ return {
           --"htmx",
           --"hls",
           "jsonls",
-          "jdtls",           -- "java_language_server"
+          "jdtls", -- "java_language_server"
           "tsserver",
           "kotlin_language_server",
           --"ltex",
@@ -99,6 +99,9 @@ return {
 
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      capabilities.textDocument.inlayHint = {
+        dynamicRegistration = false
+      }
       local lspconfig = require("lspconfig")
 
       lspconfig.angularls.setup({
@@ -115,6 +118,31 @@ return {
       })
       lspconfig.clangd.setup({
         capabilities = capabilities,
+        settings = {
+          c = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = false,
+            },
+          },
+
+          cpp = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = false,
+            },
+          },
+        }
       })
       -- lspconfig.csharp_ls.setup({
       --     capabilities = capabilities,
@@ -152,11 +180,38 @@ return {
       lspconfig.jsonls.setup({
         capabilities = capabilities,
       })
-      lspconfig.jdtls.setup({       --lspconfig.java_language_server.setup({
+      --lspconfig.java_language_server.setup({})
+      lspconfig.jdtls.setup({
         capabilities = capabilities,
       })
       lspconfig.tsserver.setup({
         capabilities = capabilities,
+        settings = {
+
+          javascript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = false,
+            },
+          },
+
+          typescript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = false,
+            },
+          },
+        },
       })
       lspconfig.kotlin_language_server.setup({
         capabilities = capabilities,
@@ -193,9 +248,12 @@ return {
             procMacro = {
               enable = true,
             },
+            inlayHints = {
+              enable = true
+            }
           },
         },
-        --capabilities = capabilities,
+        capabilities = capabilities,
       })
       lspconfig.sqls.setup({
         capabilities = capabilities,
@@ -252,9 +310,10 @@ return {
         { noremap = true, silent = true, desc = "Rename" })
       vim.keymap.set("n", "<leader>ci",
         function()
-          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { 0 })
         end,
         { noremap = true, silent = true, desc = "Toggle Inlay Hints" })
+      vim.lsp.inlay_hint.enable(true)
     end,
   },
 
