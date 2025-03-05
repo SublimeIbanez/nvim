@@ -20,8 +20,8 @@ return {
       conform.setup({
         formatters_by_ft = {
           javascript = { "prettier" },
-          typescript = { "prettier" },
           javascriptreact = { "prettier" },
+          typescript = { "prettier" },
           typescriptreact = { "prettier" },
           svelte = { "prettier" },
           css = { "prettier" },
@@ -62,7 +62,7 @@ return {
           --"asm_lsp",
           "bashls",
           "clangd",
-          --"csharp_ls",
+          -- "csharp_ls",
           "omnisharp",
           "cssls",
           "docker_compose_language_service",
@@ -146,11 +146,12 @@ return {
         }
       })
       -- lspconfig.csharp_ls.setup({
-      --     capabilities = capabilities,
+      --   cmd = { "csharp-ls" },
+      --   capabilities = capabilities,
       -- })
       lspconfig.omnisharp.setup({
         cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-        -- capabilities = capabilities,
+        capabilities = capabilities,
         settings = {
           FormattingOptions = {
             -- Enables support for reading code style, naming convention and analyzer
@@ -170,8 +171,23 @@ return {
             LoadProjectsOnDemand = nil,
           },
           RoslynExtensionsOptions = {
+            -- InlayHints control
+            inlayHintsOptions = {
+              enableForParameters = true,
+              forLiteralParameters = true,
+              forIndexerParameters = true,
+              forObjectCreationParameters = true,
+              forOtherParameters = true,
+              suppressForParametersThatDifferOnlyBySuffix = false,
+              suppressForParametersThatMatchMethodIntent = false,
+              suppressForParametersThatMatchArgumentName = false,
+              enableForTypes = true,
+              forImplicitVariableTypes = true,
+              forLambdaParameterTypes = true,
+              forImplicitObjectCreation = true
+            },
             -- Enables support for roslyn analyzers, code fixes and rulesets.
-            EnableAnalyzersSupport = nil,
+            EnableAnalyzersSupport = true,
             -- Enables support for showing unimported types and unimported extension
             -- methods in completion lists. When committed, the appropriate using
             -- directive will be added at the top of the current file. This option can
