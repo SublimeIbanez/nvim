@@ -34,11 +34,12 @@ return {
         default_format_opts = {
           lsp_format = "fallback",
         },
-        format_on_save = {
-          lsp_fallback = true,
-          async = false,
-          timeout_ms = 500,
-        },
+        format_on_save = nil,
+        -- format_on_save = {
+        --   lsp_fallback = false,
+        --   async = false,
+        --   timeout_ms = 500,
+        -- },
       })
 
       vim.keymap.set("n", "<leader>fm",
@@ -171,6 +172,21 @@ return {
             LoadProjectsOnDemand = nil,
           },
           RoslynExtensionsOptions = {
+            UseTestingPlatformProtocol = true,
+            -- Enables support for roslyn analyzers, code fixes and rulesets.
+            EnableAnalyzersSupport = true,
+            -- Enables support for showing unimported types and unimported extension
+            -- methods in completion lists. When committed, the appropriate using
+            -- directive will be added at the top of the current file. This option can
+            -- have a negative impact on initial completion responsiveness,
+            -- particularly for the first few completion sessions after opening a
+            -- solution.
+            EnableImportCompletion = true,
+            -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+            -- true
+            AnalyzeOpenDocumentsOnly = nil,
+            EnableDecompilationSupport = true,
+            DiagnosticWorkersThreadCount = 10,
             -- InlayHints control
             inlayHintsOptions = {
               enableForParameters = true,
@@ -186,35 +202,12 @@ return {
               forLambdaParameterTypes = true,
               forImplicitObjectCreation = true
             },
-            -- Enables support for roslyn analyzers, code fixes and rulesets.
-            EnableAnalyzersSupport = true,
-            -- Enables support for showing unimported types and unimported extension
-            -- methods in completion lists. When committed, the appropriate using
-            -- directive will be added at the top of the current file. This option can
-            -- have a negative impact on initial completion responsiveness,
-            -- particularly for the first few completion sessions after opening a
-            -- solution.
-            EnableImportCompletion = nil,
-            -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
-            -- true
-            AnalyzeOpenDocumentsOnly = nil,
           },
           Sdk = {
             -- Specifies whether to include preview versions of the .NET SDK when
             -- determining which version to use for project loading.
             IncludePrereleases = true,
           },
-          -- csharp = {
-          --   inlayHints = {
-          --     includeInlayEnumMemberValueHints = true,
-          --     includeInlayFunctionLikeReturnTypeHints = true,
-          --     includeInlayFunctionParameterTypeHints = true,
-          --     includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-          --     includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-          --     includeInlayPropertyDeclarationTypeHints = true,
-          --     includeInlayVariableTypeHints = false,
-          --   },
-          -- },
         }
       })
       lspconfig.cssls.setup({
@@ -383,6 +376,65 @@ return {
       vim.lsp.inlay_hint.enable(true)
     end,
   },
+
+  -- CSharp
+  -- {
+  --   "iabdelkareem/csharp.nvim",
+  --   dependencies = {
+  --     "williamboman/mason.nvim", -- Required, automatically installs omnisharp
+  --     "mfussenegger/nvim-dap",
+  --     "Tastyep/structlog.nvim",  -- Optional, but highly recommended for debugging
+  --   },
+  --   config = function()
+  --     require("mason").setup() -- Mason setup must run before csharp, only if you want to use omnisharp
+  --     require("csharp").setup(
+  --       {
+  --         lsp = {
+  --           -- Sets if you want to use omnisharp as your LSP
+  --           omnisharp = {
+  --             -- When set to false, csharp.nvim won't launch omnisharp automatically.
+  --             enable = true,
+  --             -- When set, csharp.nvim won't install omnisharp automatically. Instead, the omnisharp instance in the cmd_path will be used.
+  --             cmd_path = nil,
+  --             -- The default timeout when communicating with omnisharp
+  --             default_timeout = 1000,
+  --             -- Settings that'll be passed to the omnisharp server
+  --             enable_editor_config_support = true,
+  --             organize_imports = true,
+  --             load_projects_on_demand = false,
+  --             enable_analyzers_support = true,
+  --             enable_import_completion = true,
+  --             include_prerelease_sdks = true,
+  --             analyze_open_documents_only = false,
+  --             enable_package_auto_restore = true,
+  --             -- Launches omnisharp in debug mode
+  --             debug = false,
+  --           },
+  --           -- Sets if you want to use roslyn as your LSP
+  --           roslyn = {
+  --             -- When set to true, csharp.nvim will launch roslyn automatically.
+  --             enable = true,
+  --             -- Path to the roslyn LSP see 'Roslyn LSP Specific Prerequisites' above.
+  --             cmd_path = nil,
+  --           },
+  --           -- The capabilities to pass to the omnisharp server
+  --           capabilities = nil,
+  --           -- on_attach function that'll be called when the LSP is attached to a buffer
+  --           on_attach = nil
+  --         },
+  --         logging = {
+  --           -- The minimum log level.
+  --           level = "INFO",
+  --         },
+  --         dap = {
+  --           -- When set, csharp.nvim won't launch install and debugger automatically. Instead, it'll use the debug adapter specified.
+  --           --- @type string?
+  --           adapter_name = nil,
+  --         }
+  --       }
+  --     )
+  --   end
+  -- },
 
   -- Error mapping -- lines
   {
