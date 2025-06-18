@@ -75,7 +75,7 @@ return {
           --"hls",
           "jsonls",
           "jdtls", -- "java_language_server"
-          "tsserver",
+          "ts_ls", -- "tsserver" (deprecated?),
           "kotlin_language_server",
           --"ltex",
           "lua_ls",
