@@ -48,7 +48,7 @@ return {
         },
         keys = { -- popup_mappings
           scroll_down = "<c-d>", -- binding to scroll down inside the popup
-          scroll_up = "<c-u>",   -- binding to scroll up inside the popup
+          scroll_up = "<c-u>", -- binding to scroll up inside the popup
         },
         window = {
           border = "none",            -- none, single, double, shadow
@@ -75,19 +75,21 @@ return {
         triggers = {
           {
             mode = { "n" },
-            { " ",  expr = false,       group = "Space", nowait = false, remap = false },
-            { " ?", desc = "Help",      expr = false,    nowait = false, remap = false },
-            { " c", expr = false,       group = "Code",  nowait = false, remap = false },
-            { " d", desc = "Debug",     expr = false,    nowait = false, remap = false },
-            { " e", desc = "Exit",      expr = false,    nowait = false, remap = false },
-            { " f", desc = "File",      expr = false,    nowait = false, remap = false },
-            { " h", desc = "Highlight", expr = false,    nowait = false, remap = false },
-            { " n", desc = "Swap",      expr = false,    nowait = false, remap = false },
-            { " p", desc = "Open",      expr = false,    nowait = false, remap = false },
-            { " t", desc = "Terminal",  expr = false,    nowait = false, remap = false },
-            { " w", desc = "Workspace", expr = false,    nowait = false, remap = false },
-            { " y", desc = "Yank",      expr = false,    nowait = false, remap = false },
-            { "g",  expr = false,       group = "Goto",  nowait = false, remap = false },
+            { " ",  expr = false,       group = "Space",      nowait = false, remap = false },
+            { " ?", desc = "Help",      expr = false,         nowait = false, remap = false },
+            { " c", expr = false,       group = "Code",       nowait = false, remap = false },
+            { " d", desc = "Debug",     expr = false,         nowait = false, remap = false },
+            { " e", desc = "Exit",      expr = false,         nowait = false, remap = false },
+            { " f", desc = "File",      expr = false,         nowait = false, remap = false },
+            { " h", desc = "Highlight", expr = false,         nowait = false, remap = false },
+            { " n", desc = "Swap",      expr = false,         nowait = false, remap = false },
+            { " p", desc = "Open",      expr = false,         nowait = false, remap = false },
+            { " t", desc = "Terminal",  expr = false,         nowait = false, remap = false },
+            { " w", desc = "Workspace", expr = false,         nowait = false, remap = false },
+            { " y", desc = "Yank",      expr = false,         nowait = false, remap = false },
+            { "g",  expr = false,       group = "Goto",       nowait = false, remap = false },
+            { "[",  expr = false,       group = "Diagnostic", nowait = false, remap = false },
+            { "]",  expr = false,       group = "Diagnostic", nowait = false, remap = false },
           },
           {
             mode = { "v" },
