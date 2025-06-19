@@ -347,9 +347,9 @@ return {
         { noremap = true, silent = true, desc = "Code Actions" })
       vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float,
         { noremap = true, silent = true, desc = "Hover Diagnostics" })
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev(),
+      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
         { noremap = true, silent = true, desc = "Prev Diagnostic" })
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next(),
+      vim.keymap.set("n", "]d", vim.diagnostic.goto_next,
         { noremap = true, silent = true, desc = "Next Diagnostic" })
       vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
         { noremap = true, silent = true, desc = "Implementation" })
