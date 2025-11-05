@@ -71,8 +71,8 @@ return {
           offsets = {
             {
               filetype = "neo-tree",
-              text = "File Explorer",               --| function ,
-              text_align = "left",                  -- | "left" | "right" | center
+              text = "File Explorer", --| function ,
+              text_align = "left",    -- | "left" | "right" | center
               separator = false,
             },
           },
@@ -98,13 +98,13 @@ return {
           -- move_wraps_at_ends = false, -- whether or not the move command "wraps" at the first or last position
           -- -- can also be a table containing 2 custom separators
           -- -- [focused and unfocused]. eg: { '|', '|' }
-          separator_style = "slant",               -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
+          separator_style = "slant",     -- "slant" | "slope" | "thick" | "thin" | { 'any', 'any' },
           -- enforce_regular_tabs = false, -- | true,
-          always_show_bufferline = true,           -- | false,
+          always_show_bufferline = true, -- | false,
           hover = {
-              enabled = true,
-              delay = 200,
-              reveal = {'close'}
+            enabled = true,
+            delay = 200,
+            reveal = { 'close' }
           },
 
           -- sort_by = ...
@@ -115,12 +115,23 @@ return {
           sort_by = "id",
         },
       })
+
+      if vim.env.SSH_CLIENT or vim.env.SSH_TTY or vim.env.SSH_CONNECTION then -- pray they can all work together and play nice
+        vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+        vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
+          { noremap = true, silent = true, desc = "Previous Buffer" })
+        vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
+          { noremap = true, silent = true, desc = "Previous Buffer" })
+      elseif vim.loop.os_uname().sysname == "Darwin" then -- mac-specific
+        vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+        vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
+          { noremap = true, silent = true, desc = "Previous Buffer" })
+      else -- everything else because fuck you mac
+        vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
+          { noremap = true, silent = true, desc = "Previous Buffer" })
+      end
     end,
-    -- MacOS
-    vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" }),
-    vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true, desc = "Previous Buffer" }),
-    -- Everything else (Fuck you mac)
-    -- vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" }),
-    -- vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true, desc = "Previous Buffer" }),
   },
 }
