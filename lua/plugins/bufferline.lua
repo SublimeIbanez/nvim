@@ -116,22 +116,28 @@ return {
         },
       })
 
-      if vim.env.SSH_CLIENT or vim.env.SSH_TTY or vim.env.SSH_CONNECTION then -- pray they can all work together and play nice
-        vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
-        vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
-          { noremap = true, silent = true, desc = "Previous Buffer" })
-        vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
-        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
-          { noremap = true, silent = true, desc = "Previous Buffer" })
-      elseif vim.loop.os_uname().sysname == "Darwin" then -- mac-specific
-        vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
-        vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
-          { noremap = true, silent = true, desc = "Previous Buffer" })
-      else -- everything else because fuck you mac
-        vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
-        vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
-          { noremap = true, silent = true, desc = "Previous Buffer" })
-      end
+      -- if os.getenv("SSH_CLIENT") or os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION") then -- pray they can all work together and play nice
+      -- vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+      -- vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
+      --   { noremap = true, silent = true, desc = "Previous Buffer" })
+      -- vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+      -- vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
+      --   { noremap = true, silent = true, desc = "Previous Buffer" })
+      -- elseif vim.loop.os_uname().sysname == "Darwin" then -- mac-specific
+      --   vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+      --   vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
+      --     { noremap = true, silent = true, desc = "Previous Buffer" })
+      -- else -- everything else because fuck you mac
+      --   vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+      --   vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
+      --     { noremap = true, silent = true, desc = "Previous Buffer" })
+      -- end
     end,
   },
+  vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" }),
+  vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
+    { noremap = true, silent = true, desc = "Previous Buffer" }),
+  vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" }),
+  vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
+    { noremap = true, silent = true, desc = "Previous Buffer" })
 }
