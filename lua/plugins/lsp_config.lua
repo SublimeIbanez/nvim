@@ -63,8 +63,7 @@ return {
           --"asm_lsp",
           "bashls",
           "clangd",
-          -- "csharp_ls",
-          "omnisharp",
+          "omnisharp", -- dotnet/c#
           "cssls",
           "docker_compose_language_service",
           "elixirls",
@@ -146,21 +145,15 @@ return {
           },
         }
       })
-      -- lspconfig.csharp_ls.setup({
-      --   cmd = { "csharp-ls" },
-      --   capabilities = capabilities,
-      -- })
       lspconfig.omnisharp.setup({
-        cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+         cmd = { vim.fn.stdpath("data") .. "/mason/packages/omnisharp/OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
         capabilities = capabilities,
         settings = {
           FormattingOptions = {
-            -- Enables support for reading code style, naming convention and analyzer
-            -- settings from .editorconfig.
+            -- Enables support for reading code style, naming convention and analyzer settings from .editorconfig.
             EnableEditorConfigSupport = true,
-            -- Specifies whether 'using' directives should be grouped and sorted during
-            -- document formatting.
-            OrganizeImports = nil,
+            -- Specifies whether 'using' directives should be grouped and sorted during document formatting.
+            OrganizeImports = true,
           },
           MsBuild = {
             -- If true, MSBuild project system will only load projects for files that
