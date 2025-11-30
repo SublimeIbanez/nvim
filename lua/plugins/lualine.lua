@@ -42,11 +42,13 @@ return {
           lualine_a = { "mode" },
           lualine_b = { "branch", "diff", "diagnostics" },
           lualine_c = {
-            function()
-              local is_ssh = vim.env.SSH_CLIENT or vim.env.SSH_TTY or vim.env.SSH_CONNECTION
-              local host = vim.loop.os_gethostname()
-              return (is_ssh and "SSH::[" .. vim.env.SSH_CONNECTION:match("^(%S+)") .. "] - " or "") .. host
-            end, "fileformat",
+            -- function()
+            --   local is_ssh = os.getenv("SSH_CLIENT") or os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION")
+            --   local host = "hostname"
+            --   return (is_ssh and "SSH: [" .. os.getenv("SSH_CONNECTION"):match("^(%S+)") .. "] - " or "") .. host
+            -- end,
+            "hostname",
+            "fileformat",
             {
               require("noice").api.statusline.mode.get,
               cond = require("noice").api.statusline.mode.has,

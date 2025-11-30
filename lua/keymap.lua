@@ -2,26 +2,26 @@
 vim.g.mapleader = " "
 
 -- Navigate vim panes better
-if vim.env.SSH_CLIENT or vim.env.SSH_TTY or vim.env.SSH_CONNECTION then -- pray they can all work together and play nice
-  vim.keymap.set("n", "<D-;>", "<C-w>k", { noremap = true, silent = true, desc = "Buffer Move Up" })
-  vim.keymap.set("n", "<D-j>", "<C-w>j", { noremap = true, silent = true, desc = "Buffer Move Down" })
-  vim.keymap.set("n", "<D-'>", "<C-w>h", { noremap = true, silent = true, desc = "Buffer Move left" })
-  vim.keymap.set("n", "<D-l>", "<C-w>l", { noremap = true, silent = true, desc = "Buffer Move right" })
-  vim.keymap.set("n", "<M-k>", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Buffer Move Up" })
-  vim.keymap.set("n", "<M-j>", ":wincmd j<CR>", { noremap = true, silent = true, desc = "Buffer Move Down" })
-  vim.keymap.set("n", "<M-h>", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Buffer Move left" })
-  vim.keymap.set("n", "<M-l>", ":wincmd l<CR>", { noremap = true, silent = true, desc = "Buffer Move right" })
-elseif vim.loop.os_uname().sysname == "Darwin" then -- mac-specific
-  vim.keymap.set("n", "<D-;>", "<C-w>k", { noremap = true, silent = true, desc = "Buffer Move Up" })
-  vim.keymap.set("n", "<D-j>", "<C-w>j", { noremap = true, silent = true, desc = "Buffer Move Down" })
-  vim.keymap.set("n", "<D-'>", "<C-w>h", { noremap = true, silent = true, desc = "Buffer Move left" })
-  vim.keymap.set("n", "<D-l>", "<C-w>l", { noremap = true, silent = true, desc = "Buffer Move right" })
-else -- everything else because fuck you mac
-  vim.keymap.set("n", "<M-k>", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Buffer Move Up" })
-  vim.keymap.set("n", "<M-j>", ":wincmd j<CR>", { noremap = true, silent = true, desc = "Buffer Move Down" })
-  vim.keymap.set("n", "<M-h>", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Buffer Move left" })
-  vim.keymap.set("n", "<M-l>", ":wincmd l<CR>", { noremap = true, silent = true, desc = "Buffer Move right" })
-end
+-- if os.getenv("SSH_CLIENT") or os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION") then -- pray they can all work together and play nice
+vim.keymap.set("n", "<D-;>", "<C-w>k", { noremap = true, silent = true, desc = "Buffer Move Up" })
+vim.keymap.set("n", "<D-j>", "<C-w>j", { noremap = true, silent = true, desc = "Buffer Move Down" })
+vim.keymap.set("n", "<D-'>", "<C-w>h", { noremap = true, silent = true, desc = "Buffer Move left" })
+vim.keymap.set("n", "<D-l>", "<C-w>l", { noremap = true, silent = true, desc = "Buffer Move right" })
+vim.keymap.set("n", "<M-k>", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Buffer Move Up" })
+vim.keymap.set("n", "<M-j>", ":wincmd j<CR>", { noremap = true, silent = true, desc = "Buffer Move Down" })
+vim.keymap.set("n", "<M-h>", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Buffer Move left" })
+vim.keymap.set("n", "<M-l>", ":wincmd l<CR>", { noremap = true, silent = true, desc = "Buffer Move right" })
+-- elseif vim.loop.os_uname().sysname == "Darwin" then -- mac-specific
+--   vim.keymap.set("n", "<D-;>", "<C-w>k", { noremap = true, silent = true, desc = "Buffer Move Up" })
+--   vim.keymap.set("n", "<D-j>", "<C-w>j", { noremap = true, silent = true, desc = "Buffer Move Down" })
+--   vim.keymap.set("n", "<D-'>", "<C-w>h", { noremap = true, silent = true, desc = "Buffer Move left" })
+--   vim.keymap.set("n", "<D-l>", "<C-w>l", { noremap = true, silent = true, desc = "Buffer Move right" })
+-- else -- everything else because fuck you mac
+--   vim.keymap.set("n", "<M-k>", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Buffer Move Up" })
+--   vim.keymap.set("n", "<M-j>", ":wincmd j<CR>", { noremap = true, silent = true, desc = "Buffer Move Down" })
+--   vim.keymap.set("n", "<M-h>", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Buffer Move left" })
+--   vim.keymap.set("n", "<M-l>", ":wincmd l<CR>", { noremap = true, silent = true, desc = "Buffer Move right" })
+-- end
 
 -- Remove the search highlight
 vim.keymap.set("n", "<leader>hr", ":nohlsearch<CR>", { noremap = true, silent = true, desc = "Remove" })
