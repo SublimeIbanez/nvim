@@ -7,14 +7,68 @@ return {
 
     config = function()
       local bufferline = require("bufferline")
+      local function is_neo_tree(bufnr)
+        local ft = vim.bo[bufnr].filetype
+        return ft == "neo-tree" or ft == "neo-tree-popup" or ft == "neo-tree-preview"
+      end
+
+      local function is_real_file_buf(bufnr)
+        if not vim.api.nvim_buf_is_valid(bufnr) then return false end
+        if vim.fn.buflisted(bufnr) ~= 1 then return false end
+        if is_neo_tree(bufnr) then return false end
+        if vim.bo[bufnr].buftype ~= "" then return false end -- skip nofile/terminal/quickfix/etc
+        return true
+      end
+
+      local function mru_real_buffer(exclude_bufnr)
+        local infos = vim.fn.getbufinfo({ buflisted = 1 })
+        table.sort(infos, function(a, b) return (a.lastused or 0) > (b.lastused or 0) end)
+
+        for _, info in ipairs(infos) do
+          local b = info.bufnr
+          if b ~= exclude_bufnr and is_real_file_buf(b) then
+            return b
+          end
+        end
+        return nil
+      end
+
+      local function smart_bdelete(bufnr, force)
+        bufnr = bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
+        force = force == true
+
+        local cur = vim.api.nvim_get_current_buf()
+
+        -- If we're deleting a non-current buffer, don't change focus.
+        if bufnr ~= cur then
+          vim.api.nvim_buf_delete(bufnr, { force = force })
+          return
+        end
+
+        -- Prefer alternate buffer (#) if it's a real file buffer and not neo-tree
+        local alt = vim.fn.bufnr("#")
+        local target = (alt > 0 and alt ~= bufnr and is_real_file_buf(alt)) and alt or mru_real_buffer(bufnr)
+
+        -- If nothing else exists, create an empty buffer so we don't land in neo-tree.
+        if not target then
+          vim.cmd("Dashboard")
+          target = vim.api.nvim_get_current_buf()
+        else
+          vim.api.nvim_set_current_buf(target)
+        end
+
+        vim.api.nvim_buf_delete(bufnr, { force = force })
+      end
+
+
       bufferline.setup({
         options = {
           mode = "buffers", -- set to "tabs" to only show tabpages instead
           style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
           themable = true, -- | false, -- allows highlight groups to be overriden i.e. sets highlights as default
           numbers = "ordinal", -- | "none" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-          close_command = "bdelete! %d", -- can be a string | function, | false see "Mouse actions"
-          right_mouse_command = "bdelete! %d", -- can be a string | function | false, see "Mouse actions"
+          close_command = function(bufnr) smart_bdelete(bufnr, true) end, -- can be a string | function, | false see "Mouse actions"
+          right_mouse_command = function(bufnr) smart_bdelete(bufnr, true) end, -- can be a string | function | false, see "Mouse actions"
           left_mouse_command = "buffer %d", -- can be a string | function, | false see "Mouse actions"
           middle_mouse_command = nil, -- can be a string | function, | false see "Mouse actions"
           indicator = {
@@ -38,11 +92,11 @@ return {
           --     -- tabnr (tabs only)   | int        | the "handle" of the tab, can be converted to its ordinal number using:
           --                                               `vim.api.nvim_tabpage_get_number(buf.tabnr)`
           -- end,
-          -- max_name_length = 18,
+          max_name_length = 18,
           -- max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
           -- truncate_names = true, -- whether or not tab names should be truncated
-          -- tab_size = 18,
-          -- diagnostics = false | "nvim_lsp" | "coc",
+          tab_size = 18,
+          diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc",
           -- diagnostics_update_in_insert = false,
           -- -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
           -- diagnostics_indicator = function(count, _, _, _) --level, diagnostics_dict, context
@@ -89,9 +143,9 @@ return {
           --     -- return custom_map[element.filetype]
           -- end,
           -- show_buffer_icons = true, -- | false, -- disable filetype icons for buffers
-          -- show_buffer_close_icons = true, -- | false,
-          -- show_close_icon = true, -- | false,
-          -- show_tab_indicators = true, -- | false,
+          show_buffer_close_icons = true, -- | false,
+          show_close_icon = true,         -- | false,
+          show_tab_indicators = true,     -- | false,
           -- show_duplicate_prefix = true, -- | false, -- whether to show duplicate buffer prefix
           -- duplicates_across_groups = true, -- whether to consider duplicate paths in different groups as duplicates
           -- persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
@@ -102,7 +156,7 @@ return {
           -- enforce_regular_tabs = false, -- | true,
           always_show_bufferline = true, -- | false,
           hover = {
-            enabled = true,
+            enabled = false,
             delay = 200,
             reveal = { 'close' }
           },
@@ -132,12 +186,16 @@ return {
       --   vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
       --     { noremap = true, silent = true, desc = "Previous Buffer" })
       -- end
+
+      vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+      vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
+        { noremap = true, silent = true, desc = "Previous Buffer" })
+      vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
+      vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
+        { noremap = true, silent = true, desc = "Previous Buffer" })
+      vim.keymap.set("n", "<leader>fq", function() smart_bdelete(0, false) end,
+        { noremap = true, silent = true, desc = "Close Current Buffer" })
     end,
+
   },
-  vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" }),
-  vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
-    { noremap = true, silent = true, desc = "Previous Buffer" }),
-  vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" }),
-  vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
-    { noremap = true, silent = true, desc = "Previous Buffer" })
 }
