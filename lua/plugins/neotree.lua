@@ -51,7 +51,6 @@ return {
           },
         },
         open_files_do_not_replace_types = { -- when opening files, do not use windows containing these filetypes or buftypes
-
           "terminal",
           "trouble",
           "qf"
