@@ -9,8 +9,10 @@ vim.keymap.set("n", "<D-;>", "<C-w>k", { noremap = true, silent = true, desc = "
 vim.keymap.set("n", "<D-h>", "<C-w>k", { noremap = true, silent = true, desc = "Buffer Move Up" })
 vim.keymap.set("n", "<D-l>", "<C-w>l", { noremap = true, silent = true, desc = "Buffer Move right" })
 
+vim.keymap.set("n", "<M-'>", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Buffer Move left" })
 vim.keymap.set("n", "<M-h>", ":wincmd h<CR>", { noremap = true, silent = true, desc = "Buffer Move left" })
 vim.keymap.set("n", "<M-j>", ":wincmd j<CR>", { noremap = true, silent = true, desc = "Buffer Move Down" })
+vim.keymap.set("n", "<M-;>", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Buffer Move Up" })
 vim.keymap.set("n", "<M-k>", ":wincmd k<CR>", { noremap = true, silent = true, desc = "Buffer Move Up" })
 vim.keymap.set("n", "<M-l>", ":wincmd l<CR>", { noremap = true, silent = true, desc = "Buffer Move right" })
 
