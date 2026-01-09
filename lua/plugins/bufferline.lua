@@ -19,7 +19,7 @@ return {
         if vim.bo[bufnr].buftype ~= "" then return false end -- skip nofile/terminal/quickfix/etc
         return true
       end
-
+      --
       local function mru_real_buffer(exclude_bufnr)
         local infos = vim.fn.getbufinfo({ buflisted = 1 })
         table.sort(infos, function(a, b) return (a.lastused or 0) > (b.lastused or 0) end)
@@ -32,16 +32,61 @@ return {
         end
         return nil
       end
+      --
+      -- local function smart_bdelete(bufnr, force)
+      --   bufnr = bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
+      --   force = force == true
+      --
+      --   local cur = vim.api.nvim_get_current_buf()
+      --
+      --   -- If we're deleting a non-current buffer, don't change focus.
+      --   if bufnr ~= cur then
+      --     vim.api.nvim_buf_delete(bufnr, { force = force })
+      --     return
+      --   end
+      --
+      --   -- Prefer alternate buffer (#) if it's a real file buffer and not neo-tree
+      --   local alt = vim.fn.bufnr("#")
+      --   local target = (alt > 0 and alt ~= bufnr and is_real_file_buf(alt)) and alt or mru_real_buffer(bufnr)
+      --
+      --   -- If nothing else exists, create an empty buffer so we don't land in neo-tree.
+      --   if not target then
+      --     vim.cmd("Dashboard")
+      --     target = vim.api.nvim_get_current_buf()
+      --   else
+      --     vim.api.nvim_set_current_buf(target)
+      --   end
+      --
+      --   vim.api.nvim_buf_delete(bufnr, { force = force })
+      -- end
+      local function open_fallback_buffer()
+        -- Prefer your dashboard if the command exists; otherwise just make an empty buffer.
+        if vim.fn.exists(":Dashboard") == 2 then
+          pcall(vim.cmd, "silent! Dashboard")
+          return vim.api.nvim_get_current_buf()
+        end
+
+        vim.cmd("enew")
+        return vim.api.nvim_get_current_buf()
+      end
 
       local function smart_bdelete(bufnr, force)
-        bufnr = bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
-        force = force == true
+        bufnr = (bufnr == 0) and vim.api.nvim_get_current_buf() or bufnr
+        force = (force == true)
+
+        if not vim.api.nvim_buf_is_valid(bufnr) then
+          return
+        end
 
         local cur = vim.api.nvim_get_current_buf()
 
         -- If we're deleting a non-current buffer, don't change focus.
         if bufnr ~= cur then
-          vim.api.nvim_buf_delete(bufnr, { force = force })
+          vim.schedule(function()
+            if vim.api.nvim_buf_is_valid(bufnr) then
+              vim.api.nvim_buf_delete(bufnr, { force = force })
+            end
+          end)
           return
         end
 
@@ -49,16 +94,20 @@ return {
         local alt = vim.fn.bufnr("#")
         local target = (alt > 0 and alt ~= bufnr and is_real_file_buf(alt)) and alt or mru_real_buffer(bufnr)
 
-        -- If nothing else exists, create an empty buffer so we don't land in neo-tree.
-        if not target then
-          vim.cmd("Dashboard")
-          target = vim.api.nvim_get_current_buf()
-        else
+        if target and vim.api.nvim_buf_is_valid(target) then
           vim.api.nvim_set_current_buf(target)
+        else
+          open_fallback_buffer()
         end
 
-        vim.api.nvim_buf_delete(bufnr, { force = force })
+        -- Delete on the next tick to avoid UI callback weirdness / “hangs”
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(bufnr) then
+            vim.api.nvim_buf_delete(bufnr, { force = force })
+          end
+        end)
       end
+
 
 
       bufferline.setup({
@@ -170,23 +219,6 @@ return {
         },
       })
 
-      -- if os.getenv("SSH_CLIENT") or os.getenv("SSH_TTY") or os.getenv("SSH_CONNECTION") then -- pray they can all work together and play nice
-      -- vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
-      -- vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
-      --   { noremap = true, silent = true, desc = "Previous Buffer" })
-      -- vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
-      -- vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
-      --   { noremap = true, silent = true, desc = "Previous Buffer" })
-      -- elseif vim.loop.os_uname().sysname == "Darwin" then -- mac-specific
-      --   vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
-      --   vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
-      --     { noremap = true, silent = true, desc = "Previous Buffer" })
-      -- else -- everything else because fuck you mac
-      --   vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
-      --   vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
-      --     { noremap = true, silent = true, desc = "Previous Buffer" })
-      -- end
-
       vim.keymap.set("n", "<D-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
       vim.keymap.set("n", "<D-,>", ":BufferLineCyclePrev<CR>",
         { noremap = true, silent = true, desc = "Previous Buffer" })
@@ -196,6 +228,5 @@ return {
       vim.keymap.set("n", "<leader>fq", function() smart_bdelete(0, false) end,
         { noremap = true, silent = true, desc = "Close Current Buffer" })
     end,
-
   },
 }
