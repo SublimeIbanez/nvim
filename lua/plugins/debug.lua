@@ -31,32 +31,32 @@ return {
       require("dap-go").setup()
 
       -- C / C++ / Rust
-      dap.adapters.lldb = {
-        name = "lldb",
-        type = "executable",
-        command = "/usr/bin/lldb-dap-18",         -- Must be absolute path
-      }
-      dap.configurations.cpp = {
-        {
-          name = "Launch",
-          type = "lldb",
-          request = "launch",
-          program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-          end,
-          cwd = '${workspaceFolder}',
-          stopAtEntry = true,
-          setupCommands = {
-            {
-              text = '-enable-pretty-printing',
-              description = 'enable pretty printing',
-              ignoreFailures = false
-            },
-          },
-        },
-      }
-      dap.configurations.c = dap.configurations.cpp
-      dap.configurations.rust = dap.configurations.cpp
+      -- dap.adapters.lldb = {
+      --   name = "lldb",
+      --   type = "executable",
+      --   command = "/usr/bin/lldb-dap-18",         -- Must be absolute path
+      -- }
+      -- dap.configurations.cpp = {
+      --   {
+      --     name = "Launch",
+      --     type = "lldb",
+      --     request = "launch",
+      --     program = function()
+      --       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      --     end,
+      --     cwd = '${workspaceFolder}',
+      --     stopAtEntry = true,
+      --     setupCommands = {
+      --       {
+      --         text = '-enable-pretty-printing',
+      --         description = 'enable pretty printing',
+      --         ignoreFailures = false
+      --       },
+      --     },
+      --   },
+      -- }
+      -- dap.configurations.c = dap.configurations.cpp
+      -- dap.configurations.rust = dap.configurations.cpp
 
 
       -- Keymap
