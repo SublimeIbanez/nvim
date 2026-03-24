@@ -50,14 +50,32 @@ return {
           scroll_down = "<c-d>", -- binding to scroll down inside the popup
           scroll_up = "<c-u>", -- binding to scroll up inside the popup
         },
-        window = {
-          border = "none",            -- none, single, double, shadow
-          position = "bottom",        -- bottom, top
-          margin = { 1, 0, 1, 0.55 }, -- [top, right, bottom, left]. Between 0 and 1 will be treated as a percentage
-          padding = { 1, 2, 1, 2 },   -- extra window padding [top, right, bottom, left]
-          winblend = 20,              -- value between 0-100 0 for fully opaque and 100 for fully transparent
-          zindex = 1000,              -- positive value to position WhichKey above other floating windows.
+        win = {
+          -- don't allow the popup to overlap with the cursor
+          no_overlap = true,
+          -- width = 1,
+          -- height = { min = 4, max = 25 },
+          -- col = 0,
+          -- row = math.huge,
+          border = "none",
+          padding = { 1, 2, 1, 2 }, -- extra window padding [top/bottom, right/left]
+          title = true,
+          title_pos = "center",
+          zindex = 1000,
+          -- Additional vim.wo and vim.bo options
+          bo = {},
+          wo = {
+            winblend = 20, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+          },
         },
+        -- window = {
+        --   border = "none",            -- none, single, double, shadow
+        --   position = "bottom",        -- bottom, top
+        --   margin = { 1, 0, 1, 0.55 }, -- [top, right, bottom, left]. Between 0 and 1 will be treated as a percentage
+        --   padding = { 1, 2, 1, 2 },   -- extra window padding [top, right, bottom, left]
+        --   winblend = 20,              -- value between 0-100 0 for fully opaque and 100 for fully transparent
+        --   zindex = 1000,              -- positive value to position WhichKey above other floating windows.
+        -- },
         layout = {
           height = {
             min = 4,
