@@ -146,7 +146,7 @@ return {
         }
       })
       lspconfig.omnisharp.setup({
-         cmd = { vim.fn.stdpath("data") .. "/mason/packages/omnisharp/OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+        cmd = { vim.fn.stdpath("data") .. "/mason/packages/omnisharp/OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
         capabilities = capabilities,
         settings = {
           FormattingOptions = {
@@ -328,17 +328,13 @@ return {
       })
 
       -- global kepmaps
-      vim.keymap.set("n", "<leader>ck", vim.lsp.buf.hover,
+      vim.keymap.set("n", "grk", vim.lsp.buf.hover,
         { noremap = true, silent = true, desc = "Display LSP Info" })
       vim.keymap.set("n", "gd", vim.lsp.buf.definition,
         { noremap = true, silent = true, desc = "Definition" })
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
         { noremap = true, silent = true, desc = "Declaration" })
-      vim.keymap.set("n", "gr", vim.lsp.buf.references,
-        { noremap = true, silent = true, desc = "References" })
-      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action,
-        { noremap = true, silent = true, desc = "Code Actions" })
-      vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float,
+      vim.keymap.set("n", "grd", vim.diagnostic.open_float,
         { noremap = true, silent = true, desc = "Hover Diagnostics" })
       vim.keymap.set("n", "[d", vim.diagnostic.goto_prev,
         { noremap = true, silent = true, desc = "Prev Diagnostic" })
@@ -370,65 +366,6 @@ return {
     end,
   },
 
-  -- CSharp
-  -- {
-  --   "iabdelkareem/csharp.nvim",
-  --   dependencies = {
-  --     "williamboman/mason.nvim", -- Required, automatically installs omnisharp
-  --     "mfussenegger/nvim-dap",
-  --     "Tastyep/structlog.nvim",  -- Optional, but highly recommended for debugging
-  --   },
-  --   config = function()
-  --     require("mason").setup() -- Mason setup must run before csharp, only if you want to use omnisharp
-  --     require("csharp").setup(
-  --       {
-  --         lsp = {
-  --           -- Sets if you want to use omnisharp as your LSP
-  --           omnisharp = {
-  --             -- When set to false, csharp.nvim won't launch omnisharp automatically.
-  --             enable = true,
-  --             -- When set, csharp.nvim won't install omnisharp automatically. Instead, the omnisharp instance in the cmd_path will be used.
-  --             cmd_path = nil,
-  --             -- The default timeout when communicating with omnisharp
-  --             default_timeout = 1000,
-  --             -- Settings that'll be passed to the omnisharp server
-  --             enable_editor_config_support = true,
-  --             organize_imports = true,
-  --             load_projects_on_demand = false,
-  --             enable_analyzers_support = true,
-  --             enable_import_completion = true,
-  --             include_prerelease_sdks = true,
-  --             analyze_open_documents_only = false,
-  --             enable_package_auto_restore = true,
-  --             -- Launches omnisharp in debug mode
-  --             debug = false,
-  --           },
-  --           -- Sets if you want to use roslyn as your LSP
-  --           roslyn = {
-  --             -- When set to true, csharp.nvim will launch roslyn automatically.
-  --             enable = true,
-  --             -- Path to the roslyn LSP see 'Roslyn LSP Specific Prerequisites' above.
-  --             cmd_path = nil,
-  --           },
-  --           -- The capabilities to pass to the omnisharp server
-  --           capabilities = nil,
-  --           -- on_attach function that'll be called when the LSP is attached to a buffer
-  --           on_attach = nil
-  --         },
-  --         logging = {
-  --           -- The minimum log level.
-  --           level = "INFO",
-  --         },
-  --         dap = {
-  --           -- When set, csharp.nvim won't launch install and debugger automatically. Instead, it'll use the debug adapter specified.
-  --           --- @type string?
-  --           adapter_name = nil,
-  --         }
-  --       }
-  --     )
-  --   end
-  -- },
-
   -- Error mapping -- lines
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
@@ -437,18 +374,17 @@ return {
       local lines = require("lsp_lines")
       lines.setup()
 
-      -- Disable inlay error
-      -- COMMENT TO ENABLE INLAY ERROR AT START
+      -- Disable virtual_text since it's redundant due to lsp_lines
       vim.diagnostic.config({
         virtual_text = false,
       })
 
       -- UNCOMMENT TO DISABLE LINES AT START
-      -- vim.api.nvim_create_autocmd("VimEnter", {
-      --     callback = function()
-      --         lines.toggle()
-      --     end
-      -- })
+      vim.api.nvim_create_autocmd("VimEnter", {
+          callback = function()
+              lines.toggle()
+          end
+      })
 
       -- Toggle inlay
       function ToggleInlay()
@@ -472,10 +408,7 @@ return {
         { noremap = true, silent = true, desc = "Toggle Lines Error" })
 
       -- Action to toggle inline error alone
-      vim.keymap.set(
-        { "n", "v" },
-        "<leader>ct",
-        ToggleInlay,
+      vim.keymap.set({ "n", "v" }, "<leader>ct", ToggleInlay,
         { noremap = true, silent = true, desc = "Toggle Inline Error" }
       )
     end,

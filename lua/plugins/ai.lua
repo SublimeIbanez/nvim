@@ -85,18 +85,18 @@ return {
       --
       -- likely ill add a mode check and assert on required visual mode
       -- so just prepare for it now
-      vim.keymap.set("v", "<leader>9v", function()
+      vim.keymap.set("v", "<leader>c9v", function()
         _99.visual()
-      end)
+      end, { noremap = true, silent = true, desc = "Prompt Selection" })
 
       --- if you have a request you dont want to make any changes, just cancel it
-      vim.keymap.set("n", "<leader>9x", function()
+      vim.keymap.set("n", "<leader>c9xa", function()
         _99.stop_all_requests()
-      end)
+      end, { noremap = true, silent = true, desc = "Stop all Requests" })
 
-      vim.keymap.set("n", "<leader>9s", function()
+      vim.keymap.set("n", "<leader>c9s", function()
         _99.search()
-      end)
+      end, { noremap = true, silent = true, desc = "Search" })
     end,
   },
 }
