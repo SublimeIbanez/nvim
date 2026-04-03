@@ -179,7 +179,7 @@ return {
               separator = false,
             },
           },
-          -- color_icons = true, -- | false, -- whether or not to add the filetype icon highlights
+          color_icons = true, -- | false, -- whether or not to add the filetype icon highlights
           -- get_element_icon = function(element)
           --     -- element consists of {filetype: string, path: string, extension: string, directory: string}
           --     -- This can be used to change how bufferline fetches the icon
@@ -225,7 +225,7 @@ return {
       vim.keymap.set("n", "<A-.>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Buffer" })
       vim.keymap.set("n", "<A-,>", ":BufferLineCyclePrev<CR>",
         { noremap = true, silent = true, desc = "Previous Buffer" })
-      vim.keymap.set("n", "<leader>fq", function() smart_bdelete(0, false) end,
+      vim.keymap.set("n", "<leader>pq", function() smart_bdelete(0, false) end,
         { noremap = true, silent = true, desc = "Close Current Buffer" })
     end,
   },

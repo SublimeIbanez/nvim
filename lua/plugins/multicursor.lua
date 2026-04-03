@@ -29,8 +29,6 @@ return {
             end
           end,
         },
-        { { "n", "i" }, "<Leader>gcc", function() vim.cmd("normal gcc") end },
-        { { "v" },      "<Leader>gc",  function() vim.cmd("normal gc") end },
       },
     },
     keys = {

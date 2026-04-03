@@ -11,7 +11,7 @@ return {
       local cwd = vim.uv.cwd()
       local basename = vim.fs.basename(cwd)
       _99.setup({
-        provider = _99.Providers.ClaudeCodeProvider,  -- default: OpenCodeProvider
+        provider = _99.Providers.ClaudeCodeProvider, -- default: OpenCodeProvider
         logger = {
           level = _99.DEBUG,
           path = "/tmp/" .. basename .. ".99.debug",
@@ -61,7 +61,7 @@ return {
           --- - Both methods apply the configured `exclude` list on top of gitignore
 
           --- What autocomplete engine to use. Defaults to native (built-in) if not specified.
-          source = "native",           -- "native" (default), "cmp", or "blink"
+          source = "native", -- "native" (default), "cmp", or "blink"
         },
 
         --- WARNING: if you change cwd then this is likely broken

@@ -52,7 +52,7 @@ return {
             {
               require("noice").api.statusline.mode.get,
               cond = require("noice").api.statusline.mode.has,
-              color = { fg = "#ba9dff" },
+              color = { bg = "#101010", fg = "#ba9dff" },
             }
           },
 

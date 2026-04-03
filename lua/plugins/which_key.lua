@@ -1,5 +1,6 @@
 return {
-  { "echasnovski/mini.nvim", version = false, config = function() require("mini.icons").setup() end },
+  { "echasnovski/mini.nvim",       version = false, config = function() require("mini.icons").setup() end },
+  { "nvim-tree/nvim-web-devicons", opts = {} },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -11,11 +12,69 @@ return {
       end
       -- Set timeout
       vim.o.timeout = true
-      vim.o.timeoutlen = 50
+      vim.o.timeoutlen = 200
 
       -- Custom setup
+      ---@class _ -- wk.Opts
       local setup = {
-        preset = "classic", -- false | "classic" | "modern" | "helix"
+        ---@type false | "classic" | "modern" | "helix"
+        preset = "classic",
+        -- Delay before showing the popup. Can be a number or a function that returns a number.
+        ---@type number | fun(ctx: { keys: string, mode: string, plugin?: string }):number
+        delay = function(ctx)
+          return ctx.plugin and 0 or 200
+        end,
+        ---@param mapping _ -- wk.Mapping
+        filter = function(mapping) -- function(mapping)
+          -- example to exclude mappings without a description
+          -- return mapping.desc and mapping.desc ~= ""
+          return true
+        end,
+        --- You can add any mappings here, or use `require('which-key').add()` later
+        ---@type _ -- wk.Spec
+        spec = {},
+        -- show a warning when issues were detected with your mappings
+        notify = true,
+        -- Which-key automatically sets up triggers for your mappings.
+        -- But you can disable this and setup the triggers manually.
+        -- Check the docs for more info.
+        ---@type _ --- wk.Spec
+        triggers = {
+          {
+            mode = { "n" },
+            { " ",  expr = false, group = "Space",      nowait = false, remap = false },
+            { " ?", expr = false, desc = "Help",        nowait = false, remap = false },
+            { " r", expr = false, group = "Code",       nowait = false, remap = false },
+            { " d", expr = false, desc = "Debug",       nowait = false, remap = false },
+            { " e", expr = false, desc = "Exit",        nowait = false, remap = false },
+            { " f", expr = false, desc = "File",        nowait = false, remap = false },
+            { " h", expr = false, desc = "Highlight",   nowait = false, remap = false },
+            { " n", expr = false, desc = "Swap",        nowait = false, remap = false },
+            { " p", expr = false, desc = "Open",        nowait = false, remap = false },
+            { " t", expr = false, desc = "Terminal",    nowait = false, remap = false },
+            { " w", expr = false, desc = "Workspace",   nowait = false, remap = false },
+            { " y", expr = false, desc = "Yank",        nowait = false, remap = false },
+            { "g",  expr = false, group = "Goto",       nowait = false, remap = false },
+            { "gr", expr = false, group = "Ref",        nowait = false, remap = false },
+            { "[",  expr = false, group = "Diagnostic", nowait = false, remap = false },
+            { "]",  expr = false, group = "Diagnostic", nowait = false, remap = false },
+          },
+          {
+            mode = { "v" },
+            { " ",  expr = false,  group = "Space", nowait = false, remap = false },
+            { " ?", desc = "Help", expr = false,    nowait = false, remap = false },
+            { " c", expr = false,  group = "Code",  nowait = false, remap = false },
+            { " p", desc = "Open", expr = false,    nowait = false, remap = false },
+            { " y", desc = "Yank", expr = false,    nowait = false, remap = false },
+          },
+
+        },
+        -- Start hidden and wait for a key to be pressed before showing the popup
+        -- Only used by enabled xo mapping modes.
+        ---@param ctx { mode: string, operator: string }
+        defer = function(ctx)
+          return ctx.mode == "V" or ctx.mode == "<C-V>"
+        end,
         plugins = {
           marks = true,     -- shows a list of your marks on ' and `
           registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -23,7 +82,7 @@ return {
           -- No actual key bindings are created
           spelling = {
             enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-            suggestions = 20, -- how many suggestions should be shown in the list?
+            suggestions = 40, -- how many suggestions should be shown in the list?
           },
           presets = {
             operators = true,    -- adds help for operators like d, y, ...
@@ -35,21 +94,7 @@ return {
             g = true,            -- bindings for prefixed with g
           },
         },
-        -- add operators that will trigger motion and text object completion
-        -- to enable all native operators, set the preset / operators plugin above
-        defer = {
-          gc = "Comments"
-        },
-        replace = {}, -- key_labels
-        icons = {
-          breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-          separator = "➜", -- symbol used between a key and it's label
-          group = "+", -- symbol prepended to a group
-        },
-        keys = { -- popup_mappings
-          scroll_down = "<c-d>", -- binding to scroll down inside the popup
-          scroll_up = "<c-u>", -- binding to scroll up inside the popup
-        },
+        ---@type _ -- wk.Win.opts
         win = {
           -- don't allow the popup to overlap with the cursor
           no_overlap = true,
@@ -68,64 +113,134 @@ return {
             winblend = 20, -- value between 0-100 0 for fully opaque and 100 for fully transparent
           },
         },
-        -- window = {
-        --   border = "none",            -- none, single, double, shadow
-        --   position = "bottom",        -- bottom, top
-        --   margin = { 1, 0, 1, 0.55 }, -- [top, right, bottom, left]. Between 0 and 1 will be treated as a percentage
-        --   padding = { 1, 2, 1, 2 },   -- extra window padding [top, right, bottom, left]
-        --   winblend = 20,              -- value between 0-100 0 for fully opaque and 100 for fully transparent
-        --   zindex = 1000,              -- positive value to position WhichKey above other floating windows.
-        -- },
         layout = {
+          -- min and max height of the columns
           height = {
             min = 4,
             max = 50,
-          }, -- min and max height of the columns
+          },
+          -- min and max width of the columns
           width = {
             min = 20,
             max = 50,
-          },              -- min and max width of the columns
-          spacing = 1,    -- spacing between columns
-          align = "left", -- align columns left, center or right
+          },
+          spacing = 1,           -- spacing between columns
+          align = "left",        -- align columns left, center or right
+        },
+        keys = {                 -- popup_mappings
+          scroll_down = "<c-d>", -- binding to scroll down inside the popup
+          scroll_up = "<c-u>",   -- binding to scroll up inside the popup
+        },
+        ---@type (string|_)[] -- wk.Sorter
+        --- Mappings are sorted using configured sorters and natural sort of the keys
+        --- Available sorters:
+        --- * local: buffer-local mappings first
+        --- * order: order of the items (Used by plugins like marks / registers)
+        --- * group: groups last
+        --- * alphanum: alpha-numerical first
+        --- * mod: special modifier keys last
+        --- * manual: the order the mappings were added
+        --- * case: lower-case first
+        sort = { "alphanum", "local", "order", "group", "mod" },
+        ---@type number|fun(node: _):boolean? -- wk.Node
+        expand = 0, -- expand groups when <= n mappings
+        -- expand = function(node)
+        --   return not node.desc -- expand all nodes without a description
+        -- end,
+        -- Functions/Lua Patterns for formatting the labels
+        ---@type table<string, ({[1]:string, [2]:string}|fun(str:string):string)[]>
+        replace = {
+          key = {
+            function(key)
+              return require("which-key.view").format(key)
+            end,
+            -- { "<Space>", "SPC" },
+          },
+          desc = {
+            { "<Plug>%(?(.*)%)?", "%1" },
+            { "^%+",              "" },
+            { "<[cC]md>",         "" },
+            { "<[cC][rR]>",       "" },
+            { "<[sS]ilent>",      "" },
+            { "^lua%s+",          "" },
+            { "^call%s+",         "" },
+            { "^:%s*",            "" },
+          },
+        },
+        icons = {
+          breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+          separator = "➜", -- symbol used between a key and it's label
+          group = "+", -- symbol prepended to a group
+          ellipsis = "…",
+          -- set to false to disable all mapping icons,
+          -- both those explicitly added in a mapping
+          -- and those from rules
+          mappings = true,
+          --- See `lua/which-key/icons.lua` for more details
+          --- Set to `false` to disable keymap icons from rules
+          ---@type _[]|false -- wk.IconRule
+          rules = {},
+          -- use the highlights from mini.icons
+          -- When `false`, it will use `WhichKeyIcon` instead
+          colors = true,
+          -- used by key format
+          keys = {
+            Up = " ",
+            Down = " ",
+            Left = " ",
+            Right = " ",
+            C = "󰘴 ",
+            M = "󰘵 ",
+            D = "󰘳 ",
+            S = "󰘶 ",
+            CR = "󰌑 ",
+            Esc = "󱊷 ",
+            ScrollWheelDown = "󱕐 ",
+            ScrollWheelUp = "󱕑 ",
+            NL = "󰌑 ",
+            BS = "󰁮",
+            Space = "󱁐 ",
+            Tab = "󰌒 ",
+            F1 = "󱊫",
+            F2 = "󱊬",
+            F3 = "󱊭",
+            F4 = "󱊮",
+            F5 = "󱊯",
+            F6 = "󱊰",
+            F7 = "󱊱",
+            F8 = "󱊲",
+            F9 = "󱊳",
+            F10 = "󱊴",
+            F11 = "󱊵",
+            F12 = "󱊶",
+          },
         },
         show_help = true, -- show a help message in the command line for using WhichKey
         show_keys = true, -- show the currently pressed key and its label as a message in the command line
-        triggers = {
-          {
-            mode = { "n" },
-            { " ",  expr = false,       group = "Space",      nowait = false, remap = false },
-            { " ?", desc = "Help",      expr = false,         nowait = false, remap = false },
-            { " c", expr = false,       group = "Code",       nowait = false, remap = false },
-            { " d", desc = "Debug",     expr = false,         nowait = false, remap = false },
-            { " e", desc = "Exit",      expr = false,         nowait = false, remap = false },
-            { " f", desc = "File",      expr = false,         nowait = false, remap = false },
-            { " h", desc = "Highlight", expr = false,         nowait = false, remap = false },
-            { " n", desc = "Swap",      expr = false,         nowait = false, remap = false },
-            { " p", desc = "Open",      expr = false,         nowait = false, remap = false },
-            { " t", desc = "Terminal",  expr = false,         nowait = false, remap = false },
-            { " w", desc = "Workspace", expr = false,         nowait = false, remap = false },
-            { " y", desc = "Yank",      expr = false,         nowait = false, remap = false },
-            { "g",  expr = false,       group = "Goto",       nowait = false, remap = false },
-            { "[",  expr = false,       group = "Diagnostic", nowait = false, remap = false },
-            { "]",  expr = false,       group = "Diagnostic", nowait = false, remap = false },
-          },
-          {
-            mode = { "v" },
-            { " ",  expr = false,  group = "Space", nowait = false, remap = false },
-            { " ?", desc = "Help", expr = false,    nowait = false, remap = false },
-            { " c", expr = false,  group = "Code",  nowait = false, remap = false },
-            { " p", desc = "Open", expr = false,    nowait = false, remap = false },
-            { " y", desc = "Yank", expr = false,    nowait = false, remap = false },
-            { "g",  expr = false,  group = "Goto",  nowait = false, remap = false },
-          },
-
-        }, -- or specifiy a list manually
+        -- disable WhichKey for certain buf types and file types.
         disable = {
-          buftypes = {},
-          filetypes = {},
+          ft = {},
+          bt = {},
         },
+        debug = false, -- enable wk.log in the current directory
       }
       which_key.setup(setup)
+
+      vim.keymap.set({ "n", "v" }, "gra", vim.lsp.buf.code_action, { desc = "Actions" }) -- built-in
+      vim.keymap.set("n", "grd", vim.diagnostic.open_float, { noremap = true, silent = true, desc = "Diagnostics" })
+      vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { noremap = true, silent = true, desc = "Declaration" })
+      vim.keymap.set("n", "grh", vim.lsp.buf.hover, { noremap = true, silent = true, desc = "Hover" })
+      vim.keymap.set("n", "gri", vim.lsp.buf.implementation, { noremap = true, silent = true, desc = "Implementation" }) -- built-in
+      vim.keymap.set("n", "grl", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { 0 })
+      end, { noremap = true, silent = true, desc = "InlayHints" })
+      vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "Rename" })           -- built-in
+      vim.keymap.set("n", "grr", vim.lsp.buf.references, { desc = "References" })   -- built-in
+      vim.keymap.set("n", "grs", vim.lsp.buf.signature_help, { noremap = true, silent = true, desc = "Signature" })
+      vim.keymap.set("n", "grt", vim.lsp.buf.type_definition, { desc = "TypeDef" }) -- built-in
+
+      vim.keymap.set("n", "gr[d", vim.diagnostic.goto_prev, { noremap = true, silent = true, desc = "<-Diagnostic" })
+      vim.keymap.set("n", "gr]d", vim.diagnostic.goto_next, { noremap = true, silent = true, desc = "->Diagnostic" })
     end
   },
 }
