@@ -1,7 +1,7 @@
 -----------------------------
 -- Base configuration
 -----------------------------
-vim.opt.termguicolors = true
+vim.o.termguicolors = true
 vim.o.scrolloff = 10
 vim.o.cursorline = true
 vim.opt.autoindent = true
